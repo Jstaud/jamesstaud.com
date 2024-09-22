@@ -1,0 +1,50 @@
+name: Deploy Infrastructure and Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up OpenTofu
+        uses: hashicorp/setup-open-tofu@v2
+        with:
+          cli_config_credentials: ${{ secrets.OPENTOFU_CREDENTIALS }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Format and Lint
+        run: |
+          black . && flake8
+
+      - name: Apply Infrastructure with OpenTofu
+        env:
+          DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+          MONGODB_PUBLIC_KEY: ${{ secrets.MONGODB_PUBLIC_KEY }}
+          MONGODB_PRIVATE_KEY: ${{ secrets.MONGODB_PRIVATE_KEY }}
+          MONGODB_PROJECT_ID: ${{ secrets.MONGODB_PROJECT_ID }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          opentofu init
+          opentofu apply -auto-approve
+
+      - name: Deploy to Digital Ocean
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Deploy Application
+        run: |
+          doctl apps update ${{ secrets.DIGITALOCEAN_APP_ID }} --spec .digitalocean.app.yaml

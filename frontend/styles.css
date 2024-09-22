@@ -1,0 +1,30 @@
+/* styles.css */
+body {
+    background-color: #f4f4f9; /* Background color */
+    font-family: Arial, sans-serif; /* Custom font */
+}
+
+h1, h2 {
+    color: #333; /* Heading color */
+}
+
+.gradio-container {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+input, .gr-button {
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.gr-button {
+    background-color: #007bff; /* Button color */
+    color: #ffffff;
+}
+
+.gr-button:hover {
+    background-color: #0056b3;
+}
