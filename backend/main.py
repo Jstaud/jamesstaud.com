@@ -18,7 +18,7 @@ db = client["jamesstaud"]
 documents_collection = db["cv_data"]
 
 # OpenAI API key initialization
-openai = OpenAI(
+openai_client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     organization=os.getenv("OPENAI_ORGANIZATION_ID"))
 
@@ -48,7 +48,7 @@ def generate_response(question: str, context: str):
         {"role": "system", "content": "You are an assistant that helps users learn more about a person's CV. Provide detailed and informative answers based on the provided context. Focus on the person's qualifications, experience, skills, and other relevant details."},
         {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}\nAnswer:"}
     ]
-    response = openai.ChatCompletion.create(
+    response = openai_client.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
         max_tokens=150,
