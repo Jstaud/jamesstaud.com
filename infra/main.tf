@@ -20,7 +20,7 @@ resource "digitalocean_app" "app" {
     static_site {
       name            = "jamesstaud.com" # Add the required name argument
       build_command   = "pip install -r requirements.txt && gradio serve app.py"
-      source_dir      = "."
+      source_dir      = "frontend"
       output_dir      = "public"
       github {
         repo   = "jstaud/jamesstaud.com"
@@ -31,6 +31,28 @@ resource "digitalocean_app" "app" {
     env {
       key   = "OPENAI_API_KEY"
       value = var.openai_api_key
+    }
+
+    env {
+      key   = "BACKEND_API_URL"
+      value = "http://backend.jamesstaud.com:8000/query"
+    }
+  }
+}
+
+resource "digitalocean_app" "backend" {
+  spec {
+    name      = "backend"
+    region    = "nyc" # Choose your preferred region
+    service {
+      name = "backend-service"
+      run_command = "uvicorn main:app --host 0.0.0.0 --port 8000"
+      source_dir = "backend"
+      github {
+        repo   = "jstaud/jamesstaud.com"
+        branch = "main"
+      }
+      http_port = 8000
     }
   }
 }
@@ -43,11 +65,6 @@ resource "digitalocean_app" "app" {
 #   provider_name                = "AZURE"
 #   provider_region_name         = "US_EAST_2" # Choose an appropriate Azure region
 # }
-
-# Output the default ingress URL of the DigitalOcean App
-output "frontend_url" {
-  value = digitalocean_app.app.default_ingress
-}
 
 # Cloudflare DNS Records
 resource "cloudflare_record" "backend" {

@@ -1,17 +1,19 @@
-import gradio as gr
-import requests
 import os
+import requests
+import gradio as gr
 
 # Function to handle user questions by querying the backend API
 def answer_question(question):
-    backend_api_url = os.getenv("BACKEND_API_URL", "http://localhost:8000/query")
+    backend_api_url = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/query")
     try:
         response = requests.post(
             backend_api_url,  # URL of the backend API
             json={"question": question}
         )
         response.raise_for_status()
-        answer = response.json().get("answer", "Sorry, I couldn't find an answer.")
+        response_json = response.json()
+        content = response_json.get("answer")
+        answer = content.get('content', "Sorry, I couldn't find an answer.")
     except requests.exceptions.RequestException as e:
         answer = f"An error occurred: {e}"
     return answer
@@ -22,7 +24,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     gr.Markdown("Feel free to ask me questions about my work, projects, and experiences.")
     
     question = gr.Textbox(label="Your Question", placeholder="Ask me about my projects, skills, etc.")
-    answer = gr.Textbox(label="Answer", interactive=False)
+    answer = gr.Markdown(label="Answer")
     
     # Button to trigger the question-answering
     ask_button = gr.Button("Ask")
