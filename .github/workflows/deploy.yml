@@ -33,6 +33,7 @@ jobs:
           opentofu init
           opentofu plan -out=tfplan
           opentofu apply -auto-approve tfplan
+          
   application_deploy:
     runs-on: ubuntu-latest
     needs: infrastructure_deploy

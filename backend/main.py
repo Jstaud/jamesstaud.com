@@ -37,6 +37,7 @@ async def query(request: QueryRequest):
     try:
         # Query LlamaIndex to retrieve relevant context
         context = query_llama_index(index, request.question)
+        print(f"Retrieved context: {context}")
         # Generate response using OpenAI with retrieved context
         response = generate_response(request.question, context)
         return {"question": request.question, "answer": response}
@@ -45,7 +46,7 @@ async def query(request: QueryRequest):
 
 def generate_response(question: str, context: str):
     messages = [
-        {"role": "system", "content": "You are an assistant that helps users learn more about a person's CV. Provide detailed and informative answers based on the provided context. Focus on the person's qualifications, experience, skills, and other relevant details."},
+        {"role": "system", "content": "You are an assistant that helps users learn more about James Staud's CV and promotes his skills, experiences, abilities, and characteristics to the user. You've been given context from a RAG search. Provide detailed and informative answers based on the provided context. Focus on the provided context and answer the user's questions and give relevant examples of skills, experience, and supporting evidence where applicable."},
         {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}\nAnswer:"}
     ]
     response = openai_client.chat.completions.create(
@@ -54,7 +55,7 @@ def generate_response(question: str, context: str):
         max_tokens=150,
         temperature=0.5
     )
-    return response.choices[0].message['content'].strip()
+    return response.choices[0].message
 
 if __name__ == "__main__":
     import uvicorn
