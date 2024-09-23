@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    environment:
+      - BACKEND_API_URL=http://localhost:8000/query
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend

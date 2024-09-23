@@ -4,55 +4,43 @@ on:
     branches:
       - main
 jobs:
-  infrastructure_deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Set up OpenTofu
-        uses: hashicorp/setup-open-tofu@v2
-        with:
-          cli_config_credentials: ${{ secrets.OPENTOFU_CREDENTIALS }}
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Format and Lint
-        run: |
-          black . && flake8
-      - name: Apply Infrastructure with OpenTofu
-        env:
-          DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
-          MONGODB_PUBLIC_KEY: ${{ secrets.MONGODB_PUBLIC_KEY }}
-          MONGODB_PRIVATE_KEY: ${{ secrets.MONGODB_PRIVATE_KEY }}
-          MONGODB_PROJECT_ID: ${{ secrets.MONGODB_PROJECT_ID }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          opentofu init
-          opentofu plan -out=tfplan
-          opentofu apply -auto-approve tfplan
-          
-  application_deploy:
-    runs-on: ubuntu-latest
-    needs: infrastructure_deploy
     steps:
       - uses: actions/checkout@v2
-      - name: Build Backend Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/backend:latest -f backend/Dockerfile .
-      - name: Build Frontend Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/frontend:latest -f frontend/Dockerfile .
-      - name: Log in to GitHub Container Registry
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-      - name: Push Backend Docker image to GitHub Container Registry
-        run: docker push ghcr.io/${{ github.repository }}/backend:latest
-      - name: Push Frontend Docker image to GitHub Container Registry
-        run: docker push ghcr.io/${{ github.repository }}/frontend:latest
-      - name: Deploy to Digital Ocean
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Deploy Application
+      - name: Convert repository name to lowercase
+        id: repo
+        run: | 
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME="${REPO_NAME#*/}"
+          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
+      
+      - name: Build the Docker images
         run: |
-          doctl apps update ${{ secrets.DIGITALOCEAN_APP_ID }} --spec .digitalocean.app.yaml
+          docker build . --file ./backend/dockerfile --tag ${{ steps.repo.outputs.repo }}-backend:latest
+          docker build . --file ./frontend/dockerfile --tag ${{ steps.repo.outputs.repo }}-frontend:latest
+
+      - name: Run the Docker containers
+        run: |
+          docker run -d -p 8000:8000 --env-file .env ${{ steps.repo.outputs.repo }}-backend:latest
+          docker run -d -p 8080:8080 --env-file .env -e BACKEND_API_URL=http://localhost:8000/query ${{ steps.repo.outputs.repo }}-frontend:latest
+
+      - name: Push the Docker images to GHCR
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker tag ${{ steps.repo.outputs.repo }}-backend:latest ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}-backend:latest
+          docker tag ${{ steps.repo.outputs.repo }}-frontend:latest ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}-frontend:latest
+          docker push ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}-backend:latest
+          docker push ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}-frontend:latest
+
+      - name: Deploy backend to DigitalOcean App Platform
+        uses: digitalocean/app_action@v1.1.5
+        with:
+          app_name: ${{ steps.repo.outputs.repo }}-backend
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Deploy frontend to DigitalOcean App Platform
+        uses: digitalocean/app_action@v1.1.5
+        with:
+          app_name: ${{ steps.repo.outputs.repo }}-frontend
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
