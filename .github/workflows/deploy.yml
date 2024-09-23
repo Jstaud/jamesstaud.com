@@ -76,7 +76,7 @@ jobs:
         env:
           BACKEND_API_URL: ${{ secrets.BACKEND_API_URL }}
         run: |
-          docker run -d -p 8080:8080 --env-file .env -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} ${{ steps.repo.outputs.repo }}-frontend:latest
+          docker run -d -p 8080:8080 -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} ${{ steps.repo.outputs.repo }}-frontend:latest
 
       - name: Push the frontend image to GHCR
         run: |
