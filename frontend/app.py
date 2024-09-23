@@ -1,13 +1,23 @@
 import gradio as gr
+import requests
+import os
 
-# Mock function to handle user questions - Replace with your RAG model integration
+# Function to handle user questions by querying the backend API
 def answer_question(question):
-    # In a real scenario, this function will query your backend or RAG model
-    # For now, it's returning a placeholder response
-    return f"Thanks for asking! Currently, this is a placeholder response to: {question}"
+    backend_api_url = os.getenv("BACKEND_API_URL", "http://localhost:8000/query")
+    try:
+        response = requests.post(
+            backend_api_url,  # URL of the backend API
+            json={"question": question}
+        )
+        response.raise_for_status()
+        answer = response.json().get("answer", "Sorry, I couldn't find an answer.")
+    except requests.exceptions.RequestException as e:
+        answer = f"An error occurred: {e}"
+    return answer
 
 # Create Gradio Interface
-with gr.Blocks(theme=gr.themes.Soft()) as demo: 
+with gr.Blocks(theme=gr.themes.Soft()) as demo:
     gr.Markdown("# James Staud - Ask Me Anything!")
     gr.Markdown("Feel free to ask me questions about my work, projects, and experiences.")
     

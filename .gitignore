@@ -169,3 +169,4 @@ crash.log
 *.tfplan
 .terraform/
 .terraform.lock.hcl
+tfplan

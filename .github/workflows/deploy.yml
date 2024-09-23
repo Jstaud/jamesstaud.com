@@ -1,35 +1,27 @@
 name: Deploy Infrastructure and Application
-
 on:
   push:
     branches:
       - main
-
 jobs:
   infrastructure_deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Set up OpenTofu
         uses: hashicorp/setup-open-tofu@v2
         with:
           cli_config_credentials: ${{ secrets.OPENTOFU_CREDENTIALS }}
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
       - name: Format and Lint
         run: |
           black . && flake8
-
       - name: Apply Infrastructure with OpenTofu
         env:
           DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
@@ -41,22 +33,21 @@ jobs:
           opentofu init
           opentofu plan -out=tfplan
           opentofu apply -auto-approve tfplan
-
   application_deploy:
     runs-on: ubuntu-latest
     needs: infrastructure_deploy
-
     steps:
       - uses: actions/checkout@v2
-      - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/my-image:latest .
-
+      - name: Build Backend Docker image
+        run: docker build -t ghcr.io/${{ github.repository }}/backend:latest -f backend/Dockerfile .
+      - name: Build Frontend Docker image
+        run: docker build -t ghcr.io/${{ github.repository }}/frontend:latest -f frontend/Dockerfile .
       - name: Log in to GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Push Docker image to GitHub Container Registry
-        run: docker push ghcr.io/${{ github.repository }}/my-image:latest
-
+      - name: Push Backend Docker image to GitHub Container Registry
+        run: docker push ghcr.io/${{ github.repository }}/backend:latest
+      - name: Push Frontend Docker image to GitHub Container Registry
+        run: docker push ghcr.io/${{ github.repository }}/frontend:latest
       - name: Deploy to Digital Ocean
         uses: digitalocean/action-doctl@v2
         with:

@@ -2,27 +2,21 @@
 name: jamesstaud-website
 services:
   - name: backend
-    github:
-      repo: Jstaud/jamesstaud.com
-      branch: main
-      build_command: pip install -r backend/requirements.txt
-      run_command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
+    dockerfile_path: backend/Dockerfile
+    build_command: pip install -r backend/requirements.txt
+    run_command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
     envs:
       - key: OPENAI_API_KEY
         scope: RUN_AND_BUILD_TIME
         value: ${OPENAI_API_KEY}  # Set from environment variables
-
   - name: frontend
-    github:
-      repo: Jstaud/jamesstaud.com
-      branch: main
-      build_command: pip install -r frontend/requirements.txt
-      run_command: python frontend/app.py
+    dockerfile_path: frontend/Dockerfile
+    build_command: pip install -r frontend/requirements.txt
+    run_command: python frontend/app.py
     envs:
       - key: GRADIO_THEME
         scope: RUN_AND_BUILD_TIME
         value: light  # Example variable
-
   - name: mongodb
     image: mongo:latest
     envs:
