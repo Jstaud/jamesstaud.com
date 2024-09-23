@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  setup:
+  infrastructure_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,23 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           opentofu init
-          opentofu apply -auto-approve
+          opentofu plan -out=tfplan
+          opentofu apply -auto-approve tfplan
+
+  application_deploy:
+    runs-on: ubuntu-latest
+    needs: infrastructure_deploy
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t ghcr.io/${{ github.repository }}/my-image:latest .
+
+      - name: Log in to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Docker image to GitHub Container Registry
+        run: docker push ghcr.io/${{ github.repository }}/my-image:latest
 
       - name: Deploy to Digital Ocean
         uses: digitalocean/action-doctl@v2
