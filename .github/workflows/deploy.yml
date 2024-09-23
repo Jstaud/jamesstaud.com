@@ -19,7 +19,7 @@ jobs:
       
       - name: Build the backend Docker image
         run: |
-          docker build . --file ./backend/dockerfile --tag ${{ steps.repo.outputs.repo }}_backend:latest
+          docker build . --file ./backend/dockerfile --tag jamesstaudcom_backend:latest
 
   build_frontend:
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
       
       - name: Build the frontend Docker image
         run: |
-          docker build . --file ./frontend/dockerfile --tag ${{ steps.repo.outputs.repo }}_frontend:latest
+          docker build . --file ./frontend/dockerfile --tag jamesstaudcom_frontend:latest
 
   deploy_backend:
     runs-on: ubuntu-latest
@@ -52,18 +52,18 @@ jobs:
           -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
           -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          ${{ steps.repo.outputs.repo }}_backend:latest
+          jamesstaudcom_backend:latest
 
       - name: Push the backend image to GHCR
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker tag ${{ steps.repo.outputs.repo }}_backend:latest ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}_backend:latest
-          docker push ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}_backend:latest
+          docker tag jamesstaudcom_backend:latest ghcr.io/${{ github.repository }}/jamesstaudcom_backend:latest
+          docker push ghcr.io/${{ github.repository }}/jamesstaudcom_backend:latest
 
       - name: Deploy backend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: ${{ steps.repo.outputs.repo }}_backend
+          app_name: jamesstaudcom_backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   deploy_frontend:
@@ -78,16 +78,16 @@ jobs:
         run: |
           docker run -d -p 8080:8080 \
             -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
-            ${{ steps.repo.outputs.repo }}_frontend:latest
+            jamesstaudcom_frontend:latest
 
       - name: Push the frontend image to GHCR
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker tag ${{ steps.repo.outputs.repo }}_frontend:latest ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}_frontend:latest
-          docker push ghcr.io/${{ github.repository }}/${{ steps.repo.outputs.repo }}_frontend:latest
+          docker tag jamesstaudcom_frontend:latest ghcr.io/${{ github.repository }}/jamesstaudcom_frontend:latest
+          docker push ghcr.io/${{ github.repository }}/jamesstaudcom_frontend:latest
 
       - name: Deploy frontend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: ${{ steps.repo.outputs.repo }}_frontend
+          app_name: jamesstaudcom_frontend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
