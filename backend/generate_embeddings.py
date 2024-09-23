@@ -1,10 +1,9 @@
 import os
 from pymongo import MongoClient
-from sentence_transformers import SentenceTransformer
-from data_ingestion import ingest_data
 from PyPDF2 import PdfReader  # You can also use pdfplumber for better text extraction
 from dotenv import load_dotenv
-from llama_indexing import setup_llama_index, query_llama_index  # Import LlamaIndex functions
+from openai import OpenAI
+from llama_indexing import setup_llama_index
 
 # Load environment variables
 load_dotenv()
@@ -12,11 +11,50 @@ load_dotenv()
 # Initialize MongoDB and embedding model
 mongo_uri = os.getenv("MONGODB_URI")
 client = MongoClient(mongo_uri)
-db = client["mydatabase"]  # Replace with your MongoDB database name
-collection = db["embeddings"]  # Collection to store document embeddings
+db = client["jamesstaud"]  # Replace with your MongoDB database name
+collection = db["cv_data"]  # Collection to store documents
+embedding_collection = db["embeddings"]  # Collection to store embeddings
+
+
+# OpenAI API key initialization
+openAIClient = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    organization=os.getenv("OPENAI_ORGANIZATION_ID"))
+
 
 # Directory containing PDF documents
 data_directory = "./data"
+
+def get_embedding(text):
+    """Generate embedding for the text using OpenAI API."""
+    response = openAIClient.embeddings.create(
+        input=text,
+        model="text-embedding-ada-002", 
+        encoding_format="float"
+    )
+    return response.data[0].embedding
+
+def ingest_data(text, source="manual"):
+    """Ingest text data into MongoDB and generate embeddings."""
+    # Generate embedding for the text
+    embedding = get_embedding(text)
+    # Create document structure
+    doc = {
+        "text": text,
+        "embedding": embedding,
+        "metadata": {"source": source}
+    }
+    # Replace old document or insert new one
+    result = collection.replace_one(
+        {"metadata.source": source},  # Filter to find the document by source
+        doc,
+        upsert=True  # Insert the document if it doesn't exist
+    )
+    if result.upserted_id:
+        print(f"Document from {source} inserted into MongoDB with _id: {result.upserted_id}")
+    else:
+        print(f"Document from {source} replaced in MongoDB.")
+
 
 def extract_text_from_pdf(file_path):
     """
@@ -62,7 +100,7 @@ if __name__ == "__main__":
     process_pdfs_in_directory(data_directory)
     
     # Set up LlamaIndex after processing PDFs
-    index = setup_llama_index()
+    index = setup_llama_index(collection)
     print("LlamaIndex setup complete.")
     
     print("Finished processing PDFs.")
