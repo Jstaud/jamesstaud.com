@@ -1,8 +1,10 @@
 import os
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
+from data_ingestion import ingest_data
 from PyPDF2 import PdfReader  # You can also use pdfplumber for better text extraction
 from dotenv import load_dotenv
+from llama_indexing import setup_llama_index, query_llama_index  # Import LlamaIndex functions
 
 # Load environment variables
 load_dotenv()
@@ -12,7 +14,6 @@ mongo_uri = os.getenv("MONGODB_URI")
 client = MongoClient(mongo_uri)
 db = client["mydatabase"]  # Replace with your MongoDB database name
 collection = db["embeddings"]  # Collection to store document embeddings
-model = SentenceTransformer("all-MiniLM-L6-v2")  # Change model as per your needs
 
 # Directory containing PDF documents
 data_directory = "./data"
@@ -23,15 +24,14 @@ def extract_text_from_pdf(file_path):
     :param file_path: Path to the PDF file.
     :return: Extracted text as a string.
     """
+    text = ""
     try:
         reader = PdfReader(file_path)
-        text = ""
         for page in reader.pages:
-            text += page.extract_text() or ""  # Extract text from each page
-        return text.strip()
+            text += page.extract_text()
     except Exception as e:
         print(f"Error reading {file_path}: {e}")
-        return ""
+    return text
 
 def generate_and_store_embedding(file_path):
     """
@@ -43,22 +43,8 @@ def generate_and_store_embedding(file_path):
         print(f"No text found in {file_path}. Skipping.")
         return
 
-    # Generate embedding
-    embedding = model.encode(text).tolist()
-
-    # Document to insert into MongoDB
-    doc = {
-        "text": text,
-        "embedding": embedding,
-        "metadata": {
-            "filename": os.path.basename(file_path),
-            "filepath": file_path
-        }
-    }
-
-    # Store in MongoDB
-    collection.insert_one(doc)
-    print(f"Embedding for {file_path} stored in MongoDB.")
+    # Generate embedding and store to MongoDB
+    ingest_data(text, source=file_path)
 
 def process_pdfs_in_directory(directory):
     """
@@ -71,6 +57,12 @@ def process_pdfs_in_directory(directory):
             generate_and_store_embedding(file_path)
 
 if __name__ == "__main__":
+    print("running")
     # Run the script to process PDFs and generate embeddings
     process_pdfs_in_directory(data_directory)
+    
+    # Set up LlamaIndex after processing PDFs
+    index = setup_llama_index()
+    print("LlamaIndex setup complete.")
+    
     print("Finished processing PDFs.")

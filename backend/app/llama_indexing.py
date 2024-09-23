@@ -1,6 +1,9 @@
-from llama_index import Document, GPTSimpleVectorIndex
+from llama_index.core.schema import Document
+from llama_index.core import VectorStoreIndex
 from pymongo import MongoClient
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # MongoDB connection setup
 mongo_uri = os.getenv("MONGODB_URI")
@@ -9,7 +12,7 @@ db = client["mydatabase"]
 documents_collection = db["documents"]
 
 # Initialize an empty LlamaIndex
-index = GPTSimpleVectorIndex([])
+index = VectorStoreIndex([])
 
 def setup_llama_index():
     """Sets up the LlamaIndex with existing documents from MongoDB."""

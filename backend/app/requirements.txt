@@ -4,6 +4,9 @@ pymongo[srv]
 python-dotenv
 openai
 sentence-transformers  # For vector embeddings
-llama_index
 llama-index
 pydantic
+PyPDF2
+sentence-transformers
+pymongo
+python-dotenv
