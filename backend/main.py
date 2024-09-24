@@ -4,7 +4,7 @@ from llama_indexing import setup_llama_index, query_llama_index
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from pymongo import MongoClient, ssl_support
+from pymongo import MongoClient
 from pydantic import BaseModel
 
 
@@ -14,11 +14,7 @@ app = FastAPI()
 
 # MongoDB connection setup
 mongo_uri = os.getenv("MONGODB_URI")
-client = MongoClient(
-    mongo_uri,
-    ssl=True,
-    ssl_cert_reqs=ssl_support.CERT_NONE  # Change this to CERT_REQUIRED if you have a valid certificate
-)
+client = MongoClient(mongo_uri)
 db = client["jamesstaud"]
 documents_collection = db["cv_data"]
 

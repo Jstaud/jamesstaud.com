@@ -3,10 +3,6 @@ uvicorn
 pymongo[srv]
 python-dotenv
 openai
-sentence-transformers  # For vector embeddings
 llama-index
 pydantic
 PyPDF2
-sentence-transformers
-pymongo
-python-dotenv
