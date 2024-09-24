@@ -38,17 +38,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run the backend container
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_ORGANIZATION_ID: ${{ secrets.OPENAI_ORGANIZATION_ID }}
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-        run: |
-          docker run -d -p 8000:8000 \ 
-          -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
-          -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
-          -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          ghcr.io/jstaud/jamesstaud.com/jamesstaudcom-backend:latest
+      # - name: Run the backend container
+      #   env:
+      #     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      #     OPENAI_ORGANIZATION_ID: ${{ secrets.OPENAI_ORGANIZATION_ID }}
+      #     MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      #   run: |
+      #     docker run -d -p 8000:8000 \ 
+      #     -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+      #     -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
+      #     -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
+      #     ghcr.io/jstaud/jamesstaud.com/jamesstaudcom-backend:latest
 
       - name: Deploy backend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
@@ -62,13 +62,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run the frontend container
-        env:
-          BACKEND_API_URL: ${{ secrets.BACKEND_API_URL }}
-        run: |
-          docker run -d -p 8080:8080 \
-            -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
-            ghcr.io/jstaud/jamesstaud.com/jamesstaudcom-frontend:latest
+      # - name: Run the frontend container
+      #   env:
+      #     BACKEND_API_URL: ${{ secrets.BACKEND_API_URL }}
+      #   run: |
+      #     docker run -d -p 8080:8080 \
+      #       -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
+      #       ghcr.io/jstaud/jamesstaud.com/jamesstaudcom-frontend:latest
 
       - name: Deploy frontend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
@@ -76,23 +76,23 @@ jobs:
           app_name: jamesstaudcom-frontend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-  create_release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+  # create_release:
+  #   name: Create Release
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     - name: Create Release
+  #       id: create_release
+  #       uses: actions/create-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         tag_name: ${{ github.ref }}
+  #         release_name: Release ${{ github.ref }}
+  #         body: |
+  #           Changes in this Release
+  #           - First Change
+  #           - Second Change
+  #         draft: false
+  #         prerelease: false
