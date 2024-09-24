@@ -15,6 +15,7 @@ jobs:
     env:
       IMAGE_NAME: jamesstaudcom-backend
       DOCKER_HUB_REPO: jamesstaud/backend.jamesstaud.com
+      DOCKERFILE_PATH: ./backend/Dockerfile
     steps:
       - uses: actions/checkout@v2
       
@@ -26,7 +27,7 @@ jobs:
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
       
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
+        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}
       
       - name: Run the Docker container
         run: |
@@ -45,6 +46,7 @@ jobs:
     env:
       IMAGE_NAME: jamesstaudcom-frontend
       DOCKER_HUB_REPO: jamesstaud/jamesstaud.com
+      DOCKERFILE_PATH: ./frontend/Dockerfile
     steps:
       - uses: actions/checkout@v2
       
@@ -56,7 +58,7 @@ jobs:
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
       
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
+        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}
       
       - name: Run the Docker container
         run: |
