@@ -14,9 +14,8 @@ jobs:
       - name: Build and publish a Docker image for backend
         uses: macbre/push-to-ghcr@master
         with:
-          image_name: jamesstaudcom_backend
+          image_name: jamesstaudcom-backend
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: backend/Dockerfile
 
   build_frontend:
     runs-on: ubuntu-latest
@@ -26,9 +25,8 @@ jobs:
       - name: Build and publish a Docker image for frontend
         uses: macbre/push-to-ghcr@master
         with:
-          image_name: jamesstaudcom_frontend
+          image_name: jamesstaudcom-frontend
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: frontend/Dockerfile
 
   deploy_backend:
     runs-on: ubuntu-latest
@@ -46,7 +44,7 @@ jobs:
           -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
           -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          ghcr.io/${{ github.repository }}/jamesstaudcom_backend:latest
+          ghcr.io/${{ github.repository }}/jamesstaudcom-backend:latest
 
       - name: Deploy backend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
@@ -66,7 +64,7 @@ jobs:
         run: |
           docker run -d -p 8080:8080 \
             -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
-            ghcr.io/${{ github.repository }}/jamesstaudcom_frontend:latest
+            ghcr.io/${{ github.repository }}/jamesstaudcom-frontend:latest
 
       - name: Deploy frontend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
