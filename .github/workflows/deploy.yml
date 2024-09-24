@@ -10,23 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Convert repository name to lowercase
-        id: lowercase
-        run: | 
-          REPO_NAME="${{ github.repository }}"
-          REPO_NAME="${REPO_NAME#*/}"
-          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
       
       - name: Build the backend Docker image
         run: |
           docker build . --file ./backend/dockerfile --tag jamesstaudcom_backend:latest
 
-      - name: Check REPO_NAME value
-        run: |
-          echo "REPO_NAME: ${{ steps.lowercase.outputs.REPO_NAME }}"
-
       - name: Push image to GHCR
         run: |
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME="${REPO_NAME#*/}"
+          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker tag jamesstaudcom_backend:latest ghcr.io/${{ steps.lowercase.outputs.REPO_NAME }}/jamesstaudcom_backend:latest
           docker push ghcr.io/${{ steps.lowercase.outputs.REPO_NAME }}/jamesstaudcom_backend:latest
@@ -35,26 +28,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Convert repository name to lowercase
-        id: lowercase
-        run: | 
-          REPO_NAME="${{ github.repository }}"
-          REPO_NAME="${REPO_NAME#*/}"
-          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
       
       - name: Build the frontend Docker image
         run: |
           docker build . --file ./frontend/dockerfile --tag jamesstaudcom_frontend:latest
 
-      - name: Check REPO_NAME value
-        run: |
-          echo "REPO_NAME: ${{ steps.lowercase.outputs.REPO_NAME }}"
-
       - name: Push image to GHCR
         run: |
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME="${REPO_NAME#*/}"
+          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker tag jamesstaudcom_frontend:latest ghcr.io/${{ steps.lowercase.outputs.REPO_NAME }}/jamesstaudcom_frontend:latest
-          docker push ghcr.io/${{ steps.lowercase.outputs.REPO_NAME }}/jamesstaudcom_frontend:latest
+          docker tag jamesstaudcom_frontend:latest ghcr.io/$REPO_NAME/jamesstaudcom_frontend:latest
+          docker push ghcr.io/$REPO_NAME/jamesstaudcom_frontend:latest
 
   deploy_backend:
     runs-on: ubuntu-latest
