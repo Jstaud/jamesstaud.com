@@ -16,6 +16,7 @@ jobs:
         with:
           image_name: jamesstaudcom_backend
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: backend/Dockerfile
 
   build_frontend:
     runs-on: ubuntu-latest
@@ -27,6 +28,7 @@ jobs:
         with:
           image_name: jamesstaudcom_frontend
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: frontend/Dockerfile
 
   deploy_backend:
     runs-on: ubuntu-latest
