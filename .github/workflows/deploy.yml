@@ -16,6 +16,7 @@ jobs:
         with:
           image_name: jamesstaudcom-backend
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: backend/Dockerfile
 
   build_frontend:
     runs-on: ubuntu-latest
@@ -27,6 +28,7 @@ jobs:
         with:
           image_name: jamesstaudcom-frontend
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: frontend/Dockerfile
 
   deploy_backend:
     runs-on: ubuntu-latest
@@ -49,7 +51,7 @@ jobs:
       - name: Deploy backend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: jamesstaudcom_backend
+          app_name: jamesstaudcom-backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   deploy_frontend:
@@ -69,5 +71,5 @@ jobs:
       - name: Deploy frontend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: jamesstaudcom_frontend
+          app_name: jamesstaudcom-frontend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
