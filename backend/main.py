@@ -7,7 +7,6 @@ from openai import OpenAI
 from pymongo import MongoClient
 from pydantic import BaseModel
 
-
 load_dotenv()
 
 app = FastAPI()
@@ -42,7 +41,7 @@ def get_api_key(api_key: str = Depends(api_key_header)):
 def read_root():
     return {"message": "Welcome to my CV Assistant!"}
 
-@app.post("/query")
+@app.post("/")
 async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
     try:
         # Query LlamaIndex to retrieve relevant context
