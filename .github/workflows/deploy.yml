@@ -74,55 +74,64 @@ jobs:
           docker tag ${{ env.IMAGE_NAME }} ${{ env.DOCKER_HUB_REPO }}
           docker push ${{ env.DOCKER_HUB_REPO }}
 
-  # deploy_backend:
-  #   runs-on: ubuntu-latest
-  #   needs: build_backend
-  #   steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Deploy backend to DigitalOcean App Platform
-  #       uses: digitalocean/app_action@v1.1.5
-  #       with:
-  #         app_name: jamesstaudcom-backend
-  #         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-  # deploy_frontend:
-  #   runs-on: ubuntu-latest
-  #   needs: build_frontend
-  #   steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Deploy frontend to DigitalOcean App Platform
-  #       uses: digitalocean/app_action@v1.1.5
-  #       with:
-  #         app_name: jamesstaudcom-frontend
-  #         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
   create_release:
-    name: Create Release
     runs-on: ubuntu-latest
-    needs: [build_backend, build_frontend]
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Generate Release Notes
-        id: generate_release_notes
-        run: |
-          # Get the latest tag
-          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
-          # Get the commit messages since the latest tag
-          RELEASE_NOTES=$(git log $LATEST_TAG..HEAD --pretty=format:"%h - %s")
-          echo "::set-output name=notes::$RELEASE_NOTES"
+    - name: Set up Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{ steps.generate_release_notes.outputs.notes }}
-          draft: false
-          prerelease: false
+    - name: Get the latest tag
+      id: get_latest_tag
+      run: |
+        LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
+        echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+    - name: Determine next version
+      id: determine_version
+      run: |
+        if [ -z "${{ env.LATEST_TAG }}" ]; then
+          echo "v0.1.0" > next_version.txt
+        else
+          IFS='.' read -r -a parts <<< "${{ env.LATEST_TAG }}"
+          major=${parts[0]#v}
+          minor=${parts[1]}
+          patch=${parts[2]}
+          patch=$((patch + 1))
+          echo "v$major.$minor.$patch" > next_version.txt
+        fi
+        NEXT_VERSION=$(cat next_version.txt)
+        echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+
+    - name: Create new tag
+      id: create_tag
+      run: |
+        git tag ${{ env.NEXT_VERSION }}
+        git push origin ${{ env.NEXT_VERSION }}
+
+    - name: Get commit messages since the latest tag
+      id: get_release_notes
+      run: |
+        LATEST_TAG=${{ env.LATEST_TAG }}
+        if [ -z "$LATEST_TAG" ]; then
+          echo "No tags found. Please create a tag first."
+          exit 1
+        fi
+        RELEASE_NOTES=$(git log $LATEST_TAG..HEAD --pretty=format:"%h - %s")
+        echo "::set-output name=notes::$RELEASE_NOTES"
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.NEXT_VERSION }}
+        release_name: Release ${{ env.NEXT_VERSION }}
+        body: ${{ steps.get_release_notes.outputs.notes }}
+        draft: false
+        prerelease: false

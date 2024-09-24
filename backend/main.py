@@ -1,9 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.security.api_key import APIKeyHeader
 from llama_indexing import setup_llama_index, query_llama_index
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from pymongo import MongoClient
+from pymongo import MongoClient, ssl_support
 from pydantic import BaseModel
 
 
@@ -13,7 +14,11 @@ app = FastAPI()
 
 # MongoDB connection setup
 mongo_uri = os.getenv("MONGODB_URI")
-client = MongoClient(mongo_uri)
+client = MongoClient(
+    mongo_uri,
+    ssl=True,
+    ssl_cert_reqs=ssl_support.CERT_NONE  # Change this to CERT_REQUIRED if you have a valid certificate
+)
 db = client["jamesstaud"]
 documents_collection = db["cv_data"]
 
@@ -28,12 +33,21 @@ index = setup_llama_index(documents_collection)
 class QueryRequest(BaseModel):
     question: str
 
+# API Key authentication
+API_KEY = os.getenv("API_KEY")
+api_key_header = APIKeyHeader(name="X-API-Key")
+
+def get_api_key(api_key: str = Depends(api_key_header)):
+    if api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Could not validate credentials")
+    return api_key
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to my CV Assistant!"}
 
 @app.post("/query")
-async def query(request: QueryRequest):
+async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
     try:
         # Query LlamaIndex to retrieve relevant context
         context = query_llama_index(index, request.question)

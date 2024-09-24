@@ -5,10 +5,14 @@ import gradio as gr
 # Function to handle user questions by querying the backend API
 def answer_question(question):
     backend_api_url = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/query")
+    api_key = os.getenv("API_KEY")  # Retrieve the API key from environment variables
+    headers = {"X-API-Key": api_key}  # Include the API key in the headers
+
     try:
         response = requests.post(
             backend_api_url,  # URL of the backend API
-            json={"question": question}
+            json={"question": question},
+            headers=headers  # Add the headers to the request
         )
         response.raise_for_status()
         response_json = response.json()
