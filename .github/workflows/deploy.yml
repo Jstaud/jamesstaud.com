@@ -17,8 +17,7 @@ jobs:
 
       - name: Push image to GHCR
         run: |
-          REPO_NAME="${{ github.repository }}"
-          REPO_NAME="${REPO_NAME#*/}"
+          REPO_NAME="${{ github.repository_owner }}/${{ github.repository }}"          
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker tag jamesstaudcom_backend:latest ghcr.io/${{ steps.lowercase.outputs.REPO_NAME }}/jamesstaudcom_backend:latest
@@ -35,8 +34,7 @@ jobs:
 
       - name: Push image to GHCR
         run: |
-          REPO_NAME="${{ github.repository }}"
-          REPO_NAME="${REPO_NAME#*/}"
+          REPO_NAME="${{ github.repository_owner }}/${{ github.repository }}"
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker tag jamesstaudcom_frontend:latest ghcr.io/$REPO_NAME/jamesstaudcom_frontend:latest
