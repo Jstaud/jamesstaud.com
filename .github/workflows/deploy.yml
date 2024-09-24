@@ -48,7 +48,7 @@ jobs:
           -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
           -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          ghcr.io/${{ github.repository }}/jamesstaudcom-backend:latest
+          ghcr.io/jstaud/jamesstaud.com/jamesstaudcom-backend:latest
 
       - name: Deploy backend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
@@ -68,7 +68,7 @@ jobs:
         run: |
           docker run -d -p 8080:8080 \
             -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
-            ghcr.io/${{ github.repository }}/jamesstaudcom-frontend:latest
+            ghcr.io/jstaud/jamesstaud.com/jamesstaudcom-frontend:latest
 
       - name: Deploy frontend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
