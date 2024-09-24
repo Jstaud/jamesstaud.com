@@ -11,38 +11,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Build the backend Docker image
-        run: |
-          docker build . --file ./backend/dockerfile --tag jamesstaudcom_backend:latest
-
-      - name: Push image to GHCR
-        id: lowercase
-        run: |
-          REPO_NAME="${{ github.repository }}"
-          LOWERCASE_REPO_NAME=$(echo $REPO_NAME | awk '{print tolower($0)}')
-          echo "REPO_NAME=$LOWERCASE_REPO_NAME" >> $GITHUB_ENV
-          echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker tag jamesstaudcom_backend:latest ghcr.io/$LOWERCASE_REPO_NAME/jamesstaudcom_backend:latest
-          docker push ghcr.io/$LOWERCASE_REPO_NAME/jamesstaudcom_backend:latest
+      - name: Build and publish a Docker image for backend
+        uses: macbre/push-to-ghcr@master
+        with:
+          image_name: jamesstaudcom_backend
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build_frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       
-      - name: Build the frontend Docker image
-        run: |
-          docker build . --file ./frontend/dockerfile --tag jamesstaudcom_frontend:latest
-
-      - name: Push image to GHCR
-        run: |
-          REPO_NAME="${{ github.repository }}"
-          LOWERCASE_REPO_NAME=$(echo $REPO_NAME | awk '{print tolower($0)}')
-          echo "REPO_NAME=$LOWERCASE_REPO_NAME" >> $GITHUB_ENV
-          echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker tag jamesstaudcom_frontend:latest ghcr.io/$LOWERCASE_REPO_NAME/jamesstaudcom_frontend:latest
-          docker push ghcr.io/$LOWERCASE_REPO_NAME/jamesstaudcom_frontend:latest
-        
+      - name: Build and publish a Docker image for frontend
+        uses: macbre/push-to-ghcr@master
+        with:
+          image_name: jamesstaudcom_frontend
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy_backend:
     runs-on: ubuntu-latest
@@ -60,7 +44,7 @@ jobs:
           -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
           -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          jamesstaudcom_backend:latest
+          ghcr.io/${{ github.repository }}/jamesstaudcom_backend:latest
 
       - name: Deploy backend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
@@ -80,7 +64,7 @@ jobs:
         run: |
           docker run -d -p 8080:8080 \
             -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
-            jamesstaudcom_frontend:latest
+            ghcr.io/${{ github.repository }}/jamesstaudcom_frontend:latest
 
       - name: Deploy frontend to DigitalOcean App Platform
         uses: digitalocean/app_action@v1.1.5
