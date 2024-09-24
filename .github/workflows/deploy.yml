@@ -89,8 +89,12 @@ jobs:
     - name: Get the latest tag
       id: get_latest_tag
       run: |
-        LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
-        echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+        LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "")
+        if [ -z "$LATEST_TAG" ]; then
+          echo "LATEST_TAG=none" >> $GITHUB_ENV
+        else
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+        fi
 
     - name: Determine next version
       id: determine_version
