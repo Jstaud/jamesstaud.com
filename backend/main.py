@@ -3,7 +3,7 @@ from fastapi.security.api_key import APIKeyHeader
 from llama_indexing import setup_llama_index, query_llama_index
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI, completions
 from pymongo import MongoClient
 from pydantic import BaseModel
 
@@ -36,6 +36,18 @@ def get_api_key(api_key: str = Depends(api_key_header)):
     if api_key != API_KEY:
         raise HTTPException(status_code=403, detail="Could not validate credentials")
     return api_key
+
+def classify_prompt(prompt: str) -> bool:
+    """
+    Classify the prompt to ensure it is appropriate for the intended use case.
+    """
+    response = openai_client.chat.completions.create(
+        model="gpt-4o-mini",
+        prompt=f"Classify the following prompt as appropriate or inappropriate for a CV and Resume assistant. If it's appropriate, respond with only the word 'appropriate', if it's inappropriate, respond with 'inappropriate': {prompt}",
+        max_tokens=10
+    )
+    classification = response.choices[0].message
+    return classification == "appropriate"
 
 @app.get("/")
 def read_root():
