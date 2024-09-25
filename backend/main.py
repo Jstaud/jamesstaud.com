@@ -56,6 +56,11 @@ def read_root():
 @app.post("/")
 async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
     try:
+
+        # Classify the prompt
+        if not classify_prompt(request.question):
+            raise HTTPException(status_code=400, detail="Inappropriate prompt")
+
         # Query LlamaIndex to retrieve relevant context
         context = query_llama_index(index, request.question)
         print(f"Retrieved context: {context}")
