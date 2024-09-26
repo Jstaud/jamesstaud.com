@@ -41,12 +41,64 @@ def classify_prompt(prompt: str) -> bool:
     """
     Classify the prompt to ensure it is appropriate for the intended use case.
     """
+    keywords = [
+        "CV", "Resume", "job", "work", "experience", "skills", "abilities",
+        "characteristics", "job application", "employment", "career", "professional",
+        "work history", "qualifications", "achievements", "education", "training",
+        "certifications", "work experience", "job history", "job skills", 
+        "career summary", "career highlights", "career objectives", "employment history",
+        "work profile", "professional background", "references", "recommendations", 
+        "personal statement", "career accomplishments", "career progression", 
+        "job duties", "responsibilities", "strengths", "key strengths", 
+        "industry experience", "professional experience", "job qualifications",
+        "professional summary", "background", "work history", 
+        "skills and abilities", "accomplishments", "qualifications", 
+        "achievements and awards", "education background", "academic qualifications",
+        "work achievements", "work-related skills", "projects", "internships", 
+        "volunteer work", "career development", "workplace skills", "job responsibilities", 
+        "employment details", "professional journey", "summary of qualifications",
+        "key achievements", "areas of expertise", "technical skills", "soft skills",
+        "languages", "certificates", "professional certifications", "job applications",
+        "employment objectives", "workplace achievements", "previous roles",
+        "past positions", "workplace responsibilities", "leadership experience",
+        "management skills", "communication skills", "teamwork", "problem-solving skills",
+        "analytical skills", "professional memberships", "current position",
+        "work goals", "career goals", "job performance", "employment record",
+        "James Staud", "James", "Staud", "software developer", "AI", "backend development"
+    ]
+    
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are an assistant that helps classify prompts as appropriate or inappropriate for a CV and Resume assistant. "
+                "You are expected to be lenient and flexible, and consider most prompts appropriate unless they are clearly irrelevant "
+                "or inappropriate for a professional context. Prompts that mention or imply work, experience, skills, professional development, "
+                "career, or anything that could be loosely connected to professional or career-related topics should be considered appropriate. "
+                "Even if the prompt is somewhat vague, it should still be classified as appropriate unless it is unmistakably unrelated "
+                "to professional, career, or job-related contexts. Assume a broad interpretation of professional intent. "
+                "If the prompt is appropriate, respond with only the word 'appropriate'. If it is clearly unrelated or inappropriate, "
+                "respond with 'inappropriate'."
+            )
+        },
+        {
+            "role": "user",
+            "content": f"Prompt: {prompt}"
+        }
+    ]
+    
+    # Add keywords contextually to the system prompt to encourage lenient matching
+    messages[0]["content"] += "These are some examples of appropriate keywords and phrases: " + ", ".join(keywords) + "."
+
     response = openai_client.chat.completions.create(
         model="gpt-4o-mini",
-        prompt=f"Classify the following prompt as appropriate or inappropriate for a CV and Resume assistant. If it's appropriate, respond with only the word 'appropriate', if it's inappropriate, respond with 'inappropriate': {prompt}",
-        max_tokens=10
+        messages=messages,
+        max_tokens=10,
+        temperature=0.5
     )
-    classification = response.choices[0].message
+
+    print(f"Classification response: {response.choices[0].message.content}")
+    classification = response.choices[0].message.content.strip().lower()
     return classification == "appropriate"
 
 @app.get("/")
@@ -68,6 +120,7 @@ async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
         response = generate_response(request.question, context)
         return {"question": request.question, "answer": response}
     except Exception as e:
+        print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 def generate_response(question: str, context: str):
