@@ -56,7 +56,7 @@ jobs:
       - name: Trigger DigitalOcean redeploy
         run: |
           curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_FRONTEND_APP_ID }}/deployments" \
-          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
+          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{"force_build":true}'
 
@@ -103,7 +103,7 @@ jobs:
       - name: Trigger DigitalOcean redeploy
         run: |
           curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_BACKEND_APP_ID }}/deployments" \
-          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
+          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{"force_build":true}'
 
