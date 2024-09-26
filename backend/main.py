@@ -33,7 +33,9 @@ API_KEY = os.getenv("API_KEY")
 api_key_header = APIKeyHeader(name="X-API-Key")
 
 def get_api_key(api_key: str = Depends(api_key_header)):
+    print(f"API key: {api_key}")
     if api_key != API_KEY:
+        print(f"Invalid API key: {api_key}")
         raise HTTPException(status_code=403, detail="Could not validate credentials")
     return api_key
 
@@ -65,7 +67,7 @@ def classify_prompt(prompt: str) -> bool:
         "analytical skills", "professional memberships", "current position",
         "work goals", "career goals", "job performance", "employment record",
         "James Staud", "James", "Staud", "software developer", "AI", "backend development", 
-        "tell me about James"
+        "tell me about James", "Salary", "contact information", "email", "Pay", "compensation"
     ]
     
     messages = [
