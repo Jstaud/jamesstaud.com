@@ -84,6 +84,26 @@ def generate_and_store_embedding(file_path):
     # Generate embedding and store to MongoDB
     ingest_data(text, source=file_path)
 
+def remove_outdated_documents(directory):
+    """
+    Remove documents from MongoDB that do not have corresponding files in the data directory.
+    :param directory: Directory containing PDF files.
+    """
+    # Get list of files currently in the directory
+    current_files = {os.path.join(directory, filename) for filename in os.listdir(directory) if filename.lower().endswith(".pdf")}
+
+    # Get all documents currently stored in MongoDB
+    stored_documents = collection.find({}, {"metadata.source": 1})
+    stored_sources = {doc["metadata"]["source"] for doc in stored_documents}
+
+    # Find outdated documents that are not in the current directory
+    outdated_sources = stored_sources - current_files
+
+    # Remove outdated documents
+    for source in outdated_sources:
+        collection.delete_one({"metadata.source": source})
+        print(f"Removed outdated document: {source}")
+
 def process_pdfs_in_directory(directory):
     """
     Processes all PDF files in a given directory.
@@ -98,6 +118,9 @@ if __name__ == "__main__":
     print("running")
     # Run the script to process PDFs and generate embeddings
     process_pdfs_in_directory(data_directory)
+    
+    # Remove documents not found in the current data directory
+    remove_outdated_documents(data_directory)
     
     # Set up LlamaIndex after processing PDFs
     index = setup_llama_index(collection)

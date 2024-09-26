@@ -64,7 +64,8 @@ def classify_prompt(prompt: str) -> bool:
         "management skills", "communication skills", "teamwork", "problem-solving skills",
         "analytical skills", "professional memberships", "current position",
         "work goals", "career goals", "job performance", "employment record",
-        "James Staud", "James", "Staud", "software developer", "AI", "backend development"
+        "James Staud", "James", "Staud", "software developer", "AI", "backend development", 
+        "tell me about James"
     ]
     
     messages = [
@@ -72,13 +73,13 @@ def classify_prompt(prompt: str) -> bool:
             "role": "system",
             "content": (
                 "You are an assistant that helps classify prompts as appropriate or inappropriate for a CV and Resume assistant. "
-                "You are expected to be lenient and flexible, and consider most prompts appropriate unless they are clearly irrelevant "
-                "or inappropriate for a professional context. Prompts that mention or imply work, experience, skills, professional development, "
-                "career, or anything that could be loosely connected to professional or career-related topics should be considered appropriate. "
-                "Even if the prompt is somewhat vague, it should still be classified as appropriate unless it is unmistakably unrelated "
-                "to professional, career, or job-related contexts. Assume a broad interpretation of professional intent. "
-                "If the prompt is appropriate, respond with only the word 'appropriate'. If it is clearly unrelated or inappropriate, "
-                "respond with 'inappropriate'."
+                "You are expected to be lenient, flexible, and consider most prompts appropriate unless they are clearly irrelevant or inappropriate. "
+                "Prompts mentioning or implying work, experience, skills, professional development, or career-related topics should be considered appropriate. "
+                "Questions that are somewhat vague or related to general information about James, such as hobbies, interests, or non-professional background, "
+                "should also be considered appropriate, provided they are not overly personal or intrusive. If asked for contact information, you should provide it. "
+                "Assume a broad interpretation of what might be relevant to a professional or general background context, including questions about James's likes, interests, "
+                "and general activities. If the prompt is appropriate, respond with only the word 'appropriate'. "
+                "If it is clearly unrelated to professional or acceptable general information or is too personal, respond with 'inappropriate'."
             )
         },
         {
@@ -125,13 +126,25 @@ async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
 
 def generate_response(question: str, context: str):
     messages = [
-        {"role": "system", "content": "You are an assistant that helps users learn more about James Staud's CV and promotes his skills, experiences, abilities, and characteristics to the user. You've been given context from a RAG search. Provide detailed and informative answers based on the provided context. Focus on the provided context and answer the user's questions and give relevant examples of skills, experience, and supporting evidence where applicable."},
-        {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}\nAnswer:"}
+        {
+            "role": "system",
+            "content": (
+                "You are an assistant that helps users learn more about James Staud's CV and promotes his skills, experiences, abilities, and characteristics. "
+                "You've been given context from a RAG search. Provide detailed and informative answers based on the provided context. "
+                "When describing work history or references, prioritize the most recent employers and experiences unless they are clearly unrelated to the question being asked. "
+                "Focus on the latest and most relevant information first, as it often reflects James's current skills and accomplishments. "
+                "If the user’s question specifically requests information from an earlier time or unrelated experience, adjust your response accordingly. "
+                "Give relevant examples of skills, experience, and supporting evidence where applicable, drawing primarily from the most recent and relevant experiences."
+            )
+        },
+        {
+            "role": "user",
+            "content": f"Context: {context}\n\nQuestion: {question}\nAnswer:"
+        }
     ]
     response = openai_client.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
-        max_tokens=150,
         temperature=0.5
     )
     return response.choices[0].message
