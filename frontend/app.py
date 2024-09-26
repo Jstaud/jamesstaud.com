@@ -17,7 +17,7 @@ gravatar_email = os.getenv("GRAVATAR_EMAIL")
 gravatar_url = get_gravatar_url(gravatar_email)
 
 # Timeout for the API request
-api_timeout = os.getenv("API_TIMEOUT", 10)
+api_timeout = 60
 
 # Function to handle user questions by querying the backend API
 def answer_question(question):
