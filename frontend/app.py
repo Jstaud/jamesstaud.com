@@ -27,7 +27,7 @@ resume_url = os.getenv("RESUME_URL", "https://github.com/Jstaud/jamesstaud.com/b
 
 # Function to open a URL in the default web browser
 def open_url(url):
-    webbrowser.open(url)
+    return url
 
 # Function to handle user questions by querying the backend API
 def answer_question(question):
@@ -63,7 +63,7 @@ def answer_question(question):
     return answer
 
 # Create Gradio Interface with improved layout and Gravatar profile image
-with gr.Blocks(theme=gr.themes.Monochrome()) as demo:
+with gr.Blocks(theme='gradio/soft', css="styles.css") as demo:
     # Personal Introduction Section
     with gr.Row():
         with gr.Column():
@@ -76,12 +76,9 @@ with gr.Blocks(theme=gr.themes.Monochrome()) as demo:
                 Feel free to ask me questions about my work, projects, skills, or anything you want to know!
                 """
             )
-            with gr.Row():
-                github_button = gr.Button("GitHub Repository")
-                resume_button = gr.Button("My Resume")
-                
-                github_button.click(lambda: open_url(github_url))
-                resume_button.click(lambda: open_url(resume_url))
+            with gr.Row(elem_classes="center-links"):
+                gr.Markdown(f'<a href="{github_url}" target="_blank" class="button-link">GitHub Repository</a>')
+                gr.Markdown(f'<a href="{resume_url}" target="_blank" class="button-link">My Resume</a>')
 
     # Main Q&A Section
     with gr.Column():
