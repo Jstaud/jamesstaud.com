@@ -27,9 +27,12 @@ jobs:
           REPO_NAME="${REPO_NAME#*/}"
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
       
-      - name: Get semantic version
-        id: version
-        run: echo "::set-output name=version::$(cat VERSION.txt)"
+      - name: Install Commitizen
+        run: pip install commitizen
+
+      - name: Get version from cz.yaml
+        id: get_version
+        run: echo "::set-output name=version::$(cz version --project)"
       
       - name: Build the Docker image
         run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
@@ -73,9 +76,12 @@ jobs:
           REPO_NAME="${REPO_NAME#*/}"
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
       
-      - name: Get semantic version
-        id: version
-        run: echo "::set-output name=version::$(cat VERSION.txt)"
+      - name: Install Commitizen
+        run: pip install commitizen
+
+      - name: Get version from cz.yaml
+        id: get_version
+        run: echo "::set-output name=version::$(cz version --project)"
       
       - name: Build the Docker image
         run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
@@ -100,3 +106,4 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{"force_build":true}'
+

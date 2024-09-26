@@ -1,0 +1,13 @@
+commitizen:
+  name: cz_conventional_commits
+  version: 0.1.0
+  tag_format: v$version
+  bump_message: "chore(release): bump version to $version"
+  changelog_incremental: true
+  changelog_start_rev: v0.1.0
+  changelog_file: CHANGELOG.md
+  update_changelog: true
+  version_files:
+    - cz.yaml
+    - pyproject.toml
+    - package.json
