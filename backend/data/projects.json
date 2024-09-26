@@ -1,0 +1,43 @@
+[
+    {
+      "id": "project_1",
+      "type": "project",
+      "name": "The Beer Money App",
+      "start_date": "2016-08-01",
+      "end_date": "2017-04-01",
+      "description": "An app to help users save money on outings and day-to-day expenses through geo-location-based coupons and savings. The app tracked user savings and partnered with local businesses to offer specials.",
+      "skills": ["iOS", "Mobile Applications", "Web Development", "Databases"],
+      "embedding": [] 
+    },
+    {
+      "id": "project_2",
+      "type": "project",
+      "name": "GridLock",
+      "start_date": "2015-09-01",
+      "end_date": "2016-09-01",
+      "description": "An API platform that enables customers to monitor and control traffic lights and track traffic in real-time, optimizing traffic light schedules with machine learning algorithms to reduce emissions and congestion.",
+      "skills": ["System Architecture", "API Development", "Embedded Systems", "Product Design", "Web Development"],
+      "embedding": [] 
+    },
+    {
+      "id": "project_3",
+      "type": "project",
+      "name": "Liza",
+      "start_date": "2014-09-01",
+      "end_date": "2014-12-01",
+      "description": "A gamification app designed to promote water conservation during drought conditions in Texas, using smart water meters and a mobile interface.",
+      "skills": ["API Development", "Embedded Systems", "Software Architectural Design", "iOS", "Mobile Applications"],
+      "embedding": [] 
+    },
+    {
+      "id": "project_4",
+      "type": "project",
+      "name": "Vert",
+      "start_date": "2014-09-01",
+      "end_date": "2014-12-01",
+      "description": "A gamification app encouraging recycling by using BLE-based smart trashcan sensors to reward participants for their conservation efforts.",
+      "skills": ["Full-Stack Development", "API Development", "Embedded Systems", "iOS", "Mobile Applications", "Databases"],
+      "embedding": [] 
+    }
+  ]
+  

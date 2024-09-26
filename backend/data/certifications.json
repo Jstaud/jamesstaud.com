@@ -1,0 +1,284 @@
+[
+    {
+      "id": "certification_1",
+      "type": "certification",
+      "name": "Data Science Bootcamp",
+      "issuer": "O'Reilly",
+      "issue_date": "2024-02-01",
+      "skills": ["Data Science", "Machine Learning"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_2",
+      "type": "certification",
+      "name": "AI Art & Text Generation",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-12-01",
+      "skills": ["Large Language Models (LLM)", "Prompt Engineering"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_3",
+      "type": "certification",
+      "name": "ChatGPT and Copilot in 4 Hours",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-12-01",
+      "skills": ["Large Language Models (LLM)", "Prompt Engineering"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_4",
+      "type": "certification",
+      "name": "ICS-400: Advanced Incident Command System for Complex Incidents",
+      "issuer": "Texas A&M Engineering Extension Service - TEEX",
+      "issue_date": "2023-12-01",
+      "skills": ["Incident Command", "Emergency Management"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_5",
+      "type": "certification",
+      "name": "Intro to Pandas",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-12-01",
+      "skills": ["Data Analysis", "Python", "Pandas"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_6",
+      "type": "certification",
+      "name": "Beginning Splunk",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Data Analytics", "Splunk"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_7",
+      "type": "certification",
+      "name": "CKAD Crash Course",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Kubernetes", "DevOps"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_8",
+      "type": "certification",
+      "name": "ChatGPT for Engineers",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Machine Learning", "Prompt Engineering"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_9",
+      "type": "certification",
+      "name": "Containers in 4 Hours",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Kubernetes", "Containerization"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_10",
+      "type": "certification",
+      "name": "Kubernetes Fundamentals",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Kubernetes", "Orchestration"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_11",
+      "type": "certification",
+      "name": "Kubernetes GitOps",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Kubernetes", "GitOps"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_12",
+      "type": "certification",
+      "name": "Kubernetes in 4 Hrs",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Kubernetes", "DevOps"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_13",
+      "type": "certification",
+      "name": "Linux Under the Hood",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Linux", "System Administration"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_14",
+      "type": "certification",
+      "name": "NLP with Transformers",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Machine Learning", "NLP", "Transformers"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_15",
+      "type": "certification",
+      "name": "Smarter Pandas for Data Science",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Data Science", "Python", "Pandas"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_16",
+      "type": "certification",
+      "name": "Terraform: Getting Started",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Terraform", "Infrastructure as Code"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_17",
+      "type": "certification",
+      "name": "Text-Based Apps with ChatGPT",
+      "issuer": "O'Reilly",
+      "issue_date": "2023-11-01",
+      "skills": ["Large Language Models (LLM)", "Prompt Engineering"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_18",
+      "type": "certification",
+      "name": "Wilderness SAR 1",
+      "issuer": "TEXSAR: Texas Search and Rescue",
+      "issue_date": "2023-11-01",
+      "expiration_date": "2025-11-01",
+      "skills": ["Search and Rescue", "Emergency Response"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_19",
+      "type": "certification",
+      "name": "IS-315.A: CERT and The Incident Command System (ICS)",
+      "issuer": "FEMA",
+      "issue_date": "2023-10-01",
+      "skills": ["Emergency Management", "Incident Command"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_20",
+      "type": "certification",
+      "name": "CPR & AED",
+      "issuer": "American Safety and Health Institute",
+      "issue_date": "2023-08-01",
+      "expiration_date": "2025-08-01",
+      "skills": ["First Aid", "Emergency Response"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_21",
+      "type": "certification",
+      "name": "Bleeding Control (BCON)",
+      "issuer": "American College of Surgeons",
+      "issue_date": "2023-07-01",
+      "skills": ["First Aid", "Emergency Response"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_22",
+      "type": "certification",
+      "name": "G-428: Community Emergency Response Team Train the Trainer",
+      "issuer": "Texas Division of Emergency Management",
+      "issue_date": "2023-05-01",
+      "skills": ["Emergency Response", "Training"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_23",
+      "type": "certification",
+      "name": "IS-201: Forms Used For The Development Of The Incident Action Plan",
+      "issuer": "FEMA",
+      "issue_date": "2023-05-01",
+      "skills": ["Incident Management", "Documentation"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_24",
+      "type": "certification",
+      "name": "IS-2200: Basic Emergency Operations Center Functions",
+      "issuer": "FEMA",
+      "issue_date": "2023-05-01",
+      "skills": ["Emergency Operations", "Incident Command"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_25",
+      "type": "certification",
+      "name": "G-317: Community Emergency Response Team (CERT) Course",
+      "issuer": "Texas Division of Emergency Management",
+      "issue_date": "2023-03-01",
+      "skills": ["Emergency Response", "Community Training"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_26",
+      "type": "certification",
+      "name": "IS-700.B: An Introduction to The National Incident Management System",
+      "issuer": "FEMA",
+      "issue_date": "2023-03-01",
+      "skills": ["Incident Management", "National Response"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_27",
+      "type": "certification",
+      "name": "Introduction to Incident Command System, ICS-100",
+      "issuer": "FEMA",
+      "issue_date": "2023-03-01",
+      "skills": ["Incident Command", "Emergency Response"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_28",
+      "type": "certification",
+      "name": "ICS-300: Intermediate Incident Command System for Expanding Incidents",
+      "issuer": "Civil Air Patrol",
+      "issue_date": "2021-09-01",
+      "skills": ["Incident Command", "Emergency Management"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_29",
+      "type": "certification",
+      "name": "IS-000800.d National Response Framework, An Introduction",
+      "issuer": "FEMA",
+      "issue_date": "2021-09-01",
+      "skills": ["National Response", "Incident Management"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_30",
+      "type": "certification",
+      "name": "ICS for Single Resources and Initial Action Incident, ICS-200",
+      "issuer": "FEMA",
+      "issue_date": "2012-01-01",
+      "skills": ["Incident Command", "Emergency Response"],
+      "embedding": [] 
+    },
+    {
+      "id": "certification_31",
+      "type": "certification",
+      "name": "Sartech II",
+      "issuer": "The National Association For Search And Rescue",
+      "issue_date": "2010-06-01",
+      "skills": ["Search and Rescue", "Emergency Management"],
+      "embedding": [] 
+    }
+  ]
+  

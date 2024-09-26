@@ -1,6 +1,6 @@
 import os
+import json
 from pymongo import MongoClient
-from PyPDF2 import PdfReader  # You can also use pdfplumber for better text extraction
 from dotenv import load_dotenv
 from openai import OpenAI
 from llama_indexing import setup_llama_index
@@ -15,35 +15,38 @@ db = client["jamesstaud"]  # Replace with your MongoDB database name
 collection = db["cv_data"]  # Collection to store documents
 embedding_collection = db["embeddings"]  # Collection to store embeddings
 
-
 # OpenAI API key initialization
 openAIClient = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
-    organization=os.getenv("OPENAI_ORGANIZATION_ID"))
+    organization=os.getenv("OPENAI_ORGANIZATION_ID")
+)
 
-
-# Directory containing PDF documents
+# Directory containing JSON documents
 data_directory = "./data"
 
 def get_embedding(text):
     """Generate embedding for the text using OpenAI API."""
     response = openAIClient.embeddings.create(
         input=text,
-        model="text-embedding-ada-002", 
+        model="text-embedding-ada-002",
         encoding_format="float"
     )
     return response.data[0].embedding
 
-def ingest_data(text, source="manual"):
-    """Ingest text data into MongoDB and generate embeddings."""
-    # Generate embedding for the text
-    embedding = get_embedding(text)
+def ingest_data(data, source):
+    """Ingest JSON data into MongoDB and generate embeddings."""
+    # Convert JSON data to a textual format for embedding
+    text = json.dumps(data, indent=2)
+    embedding = get_embedding(text)  # Generate embedding for the text
+
     # Create document structure
     doc = {
-        "text": text,
+        "data": data,
+        "text": text,  # Add 'text' field for indexing purposes
         "embedding": embedding,
         "metadata": {"source": source}
     }
+
     # Replace old document or insert new one
     result = collection.replace_one(
         {"metadata.source": source},  # Filter to find the document by source
@@ -55,42 +58,40 @@ def ingest_data(text, source="manual"):
     else:
         print(f"Document from {source} replaced in MongoDB.")
 
-
-def extract_text_from_pdf(file_path):
+def load_json_data(file_path):
     """
-    Extracts text from a PDF file.
-    :param file_path: Path to the PDF file.
-    :return: Extracted text as a string.
+    Loads and returns JSON data from a file.
+    :param file_path: Path to the JSON file.
+    :return: Loaded JSON data as a dictionary.
     """
-    text = ""
     try:
-        reader = PdfReader(file_path)
-        for page in reader.pages:
-            text += page.extract_text()
-    except Exception as e:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        return data
+    except json.JSONDecodeError as e:
         print(f"Error reading {file_path}: {e}")
-    return text
+        return None
 
 def generate_and_store_embedding(file_path):
     """
-    Generates embeddings from extracted text of a PDF and stores them in MongoDB.
-    :param file_path: Path to the PDF file.
+    Generates embeddings from JSON data and stores them in MongoDB.
+    :param file_path: Path to the JSON file.
     """
-    text = extract_text_from_pdf(file_path)
-    if not text:
-        print(f"No text found in {file_path}. Skipping.")
+    data = load_json_data(file_path)
+    if not data:
+        print(f"No data found in {file_path}. Skipping.")
         return
 
     # Generate embedding and store to MongoDB
-    ingest_data(text, source=file_path)
+    ingest_data(data, source=file_path)
 
 def remove_outdated_documents(directory):
     """
     Remove documents from MongoDB that do not have corresponding files in the data directory.
-    :param directory: Directory containing PDF files.
+    :param directory: Directory containing JSON files.
     """
-    # Get list of files currently in the directory
-    current_files = {os.path.join(directory, filename) for filename in os.listdir(directory) if filename.lower().endswith(".pdf")}
+    # Get list of JSON files currently in the directory
+    current_files = {os.path.join(directory, filename) for filename in os.listdir(directory) if filename.lower().endswith(".json")}
 
     # Get all documents currently stored in MongoDB
     stored_documents = collection.find({}, {"metadata.source": 1})
@@ -104,26 +105,26 @@ def remove_outdated_documents(directory):
         collection.delete_one({"metadata.source": source})
         print(f"Removed outdated document: {source}")
 
-def process_pdfs_in_directory(directory):
+def process_json_files_in_directory(directory):
     """
-    Processes all PDF files in a given directory.
-    :param directory: Directory containing PDF files.
+    Processes all JSON files in a given directory.
+    :param directory: Directory containing JSON files.
     """
     for filename in os.listdir(directory):
-        if filename.lower().endswith(".pdf"):
+        if filename.lower().endswith(".json"):
             file_path = os.path.join(directory, filename)
             generate_and_store_embedding(file_path)
 
 if __name__ == "__main__":
     print("running")
-    # Run the script to process PDFs and generate embeddings
-    process_pdfs_in_directory(data_directory)
-    
+    # Run the script to process JSON files and generate embeddings
+    process_json_files_in_directory(data_directory)
+
     # Remove documents not found in the current data directory
     remove_outdated_documents(data_directory)
-    
-    # Set up LlamaIndex after processing PDFs
+
+    # Set up LlamaIndex after processing JSON files
     index = setup_llama_index(collection)
     print("LlamaIndex setup complete.")
-    
-    print("Finished processing PDFs.")
+
+    print("Finished processing JSON files.")

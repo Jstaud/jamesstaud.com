@@ -1,0 +1,211 @@
+[
+    {
+      "id": "skill_1",
+      "type": "skill",
+      "name": "Azure",
+      "description": "Extensive experience with Azure cloud services, including Kubernetes and DevOps automation. Proficient in designing and managing cloud environments to support scalable and secure applications.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_2",
+      "type": "skill",
+      "name": "iOS Development",
+      "description": "Developed iOS-centric AI vision platforms and mobile applications. Skilled in integrating iOS apps with backend services and optimizing performance for mobile devices.",
+      "related_experience": ["job_3", "job_4"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_3",
+      "type": "skill",
+      "name": "Kubernetes",
+      "description": "Expertise in Kubernetes for container orchestration, managing microservices, and automating deployments. Used extensively in DevOps and cloud architecture roles.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_4",
+      "type": "skill",
+      "name": "DevOps",
+      "description": "Specialized in DevOps practices including CI/CD pipelines, Infrastructure as Code (IaC), and automation. Experienced in GitLab CI/CD, Ansible, Terraform, and GitHub Actions.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_5",
+      "type": "skill",
+      "name": "Cloud Architecture",
+      "description": "Proficient in designing and implementing cloud architectures for scalable, high-performance applications. Skilled in using AWS, Azure, and GCP for distributed cloud solutions.",
+      "related_experience": ["job_3", "job_4"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_6",
+      "type": "skill",
+      "name": "Machine Learning",
+      "description": "Experience in applying machine learning algorithms for vision systems, data extraction, and AI-driven applications. Familiar with tools like TensorFlow, PyTorch, and Azure ML.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_7",
+      "type": "skill",
+      "name": "Microservices",
+      "description": "Design and implementation of microservice architectures for scalable, modular applications. Skilled in containerization, API development, and service orchestration.",
+      "related_experience": ["job_3", "job_4"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_8",
+      "type": "skill",
+      "name": "Software Architecture",
+      "description": "Extensive experience in designing software architecture for complex systems, ensuring scalability, security, and performance. Involved in full-stack development and backend design.",
+      "related_experience": ["job_4", "job_5", "job_6"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_9",
+      "type": "skill",
+      "name": "System Integration",
+      "description": "Proficient in integrating various systems and technologies, particularly in cloud, AI, and vision systems. Expertise in connecting hardware, software, and APIs for seamless operation.",
+      "related_experience": ["job_5", "job_6"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_10",
+      "type": "skill",
+      "name": "Project Management",
+      "description": "Strong project management skills, including leading cross-functional teams, managing project timelines, and delivering high-quality products on time.",
+      "related_experience": ["job_5", "job_6", "job_7"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_11",
+      "type": "skill",
+      "name": "Data Science",
+      "description": "Skilled in data analysis, statistical modeling, and data visualization. Experienced in using Python and PostgreSQL for data manipulation and insight extraction.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_12",
+      "type": "skill",
+      "name": "Deep Learning",
+      "description": "Expert in deep learning techniques for image recognition, natural language processing, and predictive analytics. Familiar with neural network architectures such as CNNs, RNNs, and Transformers.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_13",
+      "type": "skill",
+      "name": "Natural Language Processing (NLP)",
+      "description": "Proficient in developing NLP models for text analysis, sentiment detection, and language generation. Experienced with NLP libraries like Hugging Face Transformers.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_14",
+      "type": "skill",
+      "name": "AI Model Deployment",
+      "description": "Experienced in deploying AI models to production environments using containerization, serverless architectures, and cloud-based services such as Azure ML and AWS SageMaker.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_15",
+      "type": "skill",
+      "name": "Big Data Analytics",
+      "description": "Skilled in big data tools and technologies such as Snowflake for large-scale data processing and analytics.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_16",
+      "type": "skill",
+      "name": "Predictive Modeling",
+      "description": "Expertise in creating predictive models using regression, classification, and time-series analysis. Proficient in applying these models to business and operational decision-making.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_17",
+      "type": "skill",
+      "name": "Data Engineering",
+      "description": "Proficient in designing data pipelines, ETL processes, and data warehousing solutions to support analytics and machine learning applications.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_18",
+      "type": "skill",
+      "name": "GitOps",
+      "description": "Expertise in GitOps methodologies for continuous deployment and infrastructure automation. Skilled in using ArgoCD and GitLab for managing CI/CD workflows.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_19",
+      "type": "skill",
+      "name": "Containerization",
+      "description": "Proficient in Docker and Podman for containerizing applications, ensuring consistent environments across development, testing, and production.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_20",
+      "type": "skill",
+      "name": "Platform Engineering",
+      "description": "Experience in building and managing developer platforms that enhance productivity and ensure scalability, leveraging tools like GitLab-CI, OpenShift, and Atlassian.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_21",
+      "type": "skill",
+      "name": "CI/CD Pipelines",
+      "description": "Specialized in setting up and optimizing CI/CD pipelines using GitLab, Jenkins, and GitHub Actions for streamlined code integration and deployment.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_22",
+      "type": "skill",
+      "name": "Version Control",
+      "description": "Extensive use of GitLab and GitHub for version control, collaboration, and continuous integration. Skilled in managing code repositories and branching strategies.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_23",
+      "type": "skill",
+      "name": "Monitoring and Observability",
+      "description": "Experience with SonarQube, Prometheus, and Grafana for code quality checks, monitoring, and maintaining application health.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_24",
+      "type": "skill",
+      "name": "Database Management",
+      "description": "Skilled in managing and optimizing databases including MongoDB, PostgreSQL, and other NoSQL solutions for high performance and scalability.",
+      "related_experience": ["job_1", "job_2"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_25",
+      "type": "skill",
+      "name": "Semantic Kernel & Autogen",
+      "description": "Proficient in Semantic Kernel and Autogen tools for advanced AI model development and data-driven insights generation.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    },
+    {
+      "id": "skill_26",
+      "type": "skill",
+      "name": "OpenAI Integration",
+      "description": "Experience in integrating OpenAI models for natural language processing, automation, and enhancing platform capabilities.",
+      "related_experience": ["job_1", "job_3"],
+      "embedding": [] 
+    }
+  ]
+  

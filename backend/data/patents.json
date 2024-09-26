@@ -1,0 +1,23 @@
+[
+    {
+      "id": "patent_1",
+      "type": "patent",
+      "title": "System and Method for Sensing and Computing of Perceptual Data in Industrial Environments",
+      "patent_number": "US11568511B2",
+      "issue_date": "2023-01-31",
+      "description": "A system combining sensors and computing capabilities to gather information about objects in industrial settings, enabling advanced data analysis for operational efficiency.",
+      "skills": ["Machine Vision", "Industrial Automation", "Sensor Integration"],
+      "embedding": [] 
+    },
+    {
+      "id": "patent_2",
+      "type": "patent",
+      "title": "Profiling Pallets and Goods in a Warehouse Environment",
+      "patent_number": "US20210133666A1",
+      "issue_date": "2021-05-06",
+      "description": "A system designed to capture and analyze pallet data in warehouses, providing detailed insights into inventory and streamlining warehouse management processes.",
+      "skills": ["Machine Vision", "Warehouse Management", "Data Analysis"],
+      "embedding": [] 
+    }
+  ]
+  
