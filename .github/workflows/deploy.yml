@@ -35,7 +35,7 @@ jobs:
         run: echo "::set-output name=version::$(cz version --project)"
       
       - name: Build the Docker image
-        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
+        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
       
       - name: Run the Docker container
         run: |
@@ -43,14 +43,14 @@ jobs:
           -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
           -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
+          ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }}
 
       - name: Push the Docker image to Docker Hub
         run: |
           echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-          docker tag ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} ${{ env.DOCKER_HUB_REPO }}:${{ steps.version.outputs.version }}
+          docker tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
           docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.DOCKER_HUB_REPO }}:latest
-          docker push ${{ env.DOCKER_HUB_REPO }}:${{ steps.version.outputs.version }}
+          docker push ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
           docker push ${{ env.DOCKER_HUB_REPO }}:latest
 
       - name: Trigger DigitalOcean redeploy
@@ -84,20 +84,20 @@ jobs:
         run: echo "::set-output name=version::$(cz version --project)"
       
       - name: Build the Docker image
-        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
+        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
       
       - name: Run the Docker container
         run: |
           docker run --name ${{ env.IMAGE_NAME }} -d \
           -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
-          ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
+          ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }}
 
       - name: Push the Docker image to Docker Hub
         run: |
           echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-          docker tag ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} ${{ env.DOCKER_HUB_REPO }}:${{ steps.version.outputs.version }}
+          docker tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
           docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.DOCKER_HUB_REPO }}:latest
-          docker push ${{ env.DOCKER_HUB_REPO }}:${{ steps.version.outputs.version }}
+          docker push ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
           docker push ${{ env.DOCKER_HUB_REPO }}:latest
 
       - name: Trigger DigitalOcean redeploy

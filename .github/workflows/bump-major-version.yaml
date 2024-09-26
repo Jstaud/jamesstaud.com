@@ -9,6 +9,7 @@ on:
 
 jobs:
   bump-major:
+    if: false
     runs-on: ubuntu-latest
 
     steps:
