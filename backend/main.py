@@ -35,7 +35,6 @@ api_key_header = APIKeyHeader(name="X-API-Key")
 def get_api_key(api_key: str = Depends(api_key_header)):
     print(f"API key: {api_key}")
     if api_key != API_KEY:
-        print(f"Invalid API key: {api_key}")
         raise HTTPException(status_code=403, detail="Could not validate credentials")
     return api_key
 
@@ -122,6 +121,9 @@ async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
         # Generate response using OpenAI with retrieved context
         response = generate_response(request.question, context)
         return {"question": request.question, "answer": response}
+    except HTTPException as e:
+        # Re-raise HTTP exceptions without modification
+        raise e
     except Exception as e:
         print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=str(e))
