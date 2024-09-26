@@ -1,30 +1,24 @@
-/* styles.css */
-body {
-    background-color: #f4f4f9; /* Background color */
-    font-family: Arial, sans-serif; /* Custom font */
-}
-
-h1, h2 {
-    color: #333; /* Heading color */
-}
-
-.gradio-container {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #ffffff;
-}
-
-input, .gr-button {
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
     border-radius: 5px;
-    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.gr-button {
-    background-color: #007bff; /* Button color */
-    color: #ffffff;
-}
-
-.gr-button:hover {
+.button-link:hover {
     background-color: #0056b3;
+}
+
+.center-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
