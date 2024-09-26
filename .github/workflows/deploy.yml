@@ -3,7 +3,6 @@ name: Deploy Infrastructure and Application
 on:
   push:
     branches:
-      - initial-app
       - main
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
