@@ -1,0 +1,163 @@
+[
+  {
+    "id": "job_1",
+    "type": "job",
+    "title": "DevOps Architect",
+    "employer": "Mouser Electronics",
+    "location": "Mansfield, TX",
+    "start_date": "2024-01-01",
+    "end_date": "present",
+    "current": true,
+    "years_of_service": "0.8",
+    "description": [
+      "Led the design and implementation of the company’s DevOps platform, collaborating with cloud engineers, leadership, and development teams to set standards and create training programs.",
+      "Partnered with senior leadership and an innovation team to build a robust, security-focused AI cloud platform.",
+      "Directed a groundbreaking AI project with the innovation team, utilizing technologies such as Semantic Kernel, Autogen, Azure AI Search, Snowflake, and Azure OpenAI."
+    ],
+    "skills": ["DevOps", "AI", "Azure", "Kubernetes", "GitLab CI/CD"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_2",
+    "type": "job",
+    "title": "Sr. Systems Engineer",
+    "employer": "Mouser Electronics",
+    "location": "Mansfield, TX",
+    "start_date": "2023-08-01",
+    "end_date": "2024-01-01",
+    "current": false,
+    "years_of_service": "0.4",
+    "description": [
+      "Designed and optimized critical systems and infrastructure.",
+      "Migrated CI/CD pipeline management from Jenkins to GitLab.",
+      "Managed containerized applications with OpenShift."
+    ],
+    "skills": ["Systems Engineering", "OpenShift", "CI/CD"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_3",
+    "type": "job",
+    "title": "Cloud Architect",
+    "employer": "Cloud 9 Perception",
+    "location": "Fort Worth, TX",
+    "start_date": "2023-06-01",
+    "end_date": "2023-08-01",
+    "current": false,
+    "years_of_service": "0.2",
+    "description": [
+      "Designed and built a scalable iOS-centric AI vision platform.",
+      "Developed a highly optimized cloud API using microservice architecture and container orchestration.",
+      "Implemented distributed cloud and edge computing methodologies."
+    ],
+    "skills": ["Cloud Architecture", "Microservices", "Edge Computing"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_4",
+    "type": "job",
+    "title": "Platform Architect",
+    "employer": "Cloud 9 Perception",
+    "location": "Fort Worth, TX",
+    "start_date": "2022-09-01",
+    "end_date": "2023-06-01",
+    "current": false,
+    "years_of_service": "0.8",
+    "description": [
+      "Shaped the technical foundation and direction of the platform.",
+      "Led development of full-stack solutions, including backend design, microservice development, and iOS application integration.",
+      "Managed end-to-end lifecycle of production deployments, ensuring the stability and scalability of NeuralStack."
+    ],
+    "skills": ["Full-Stack Development", "Microservices", "iOS Integration"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_5",
+    "type": "job",
+    "title": "Design Engineer",
+    "employer": "Cloud 9 Perception",
+    "location": "Arlington, TX",
+    "start_date": "2020-06-01",
+    "end_date": "2022-09-01",
+    "current": false,
+    "years_of_service": "2.3",
+    "description": [
+      "Led the design and development of engineering solutions, focusing on advancing the company’s product offerings.",
+      "Managed software development teams and guided them through complex design challenges.",
+      "Oversaw the creation of technical aspects of sales proposals and led design sprints to prepare for the launch of NeuralStack."
+    ],
+    "skills": ["Engineering Design", "Team Management", "Sales Proposals"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_6",
+    "type": "job",
+    "title": "VP of Engineering",
+    "employer": "Cloud 9 Perception",
+    "location": "Arlington, TX",
+    "start_date": "2018-11-01",
+    "end_date": "2020-06-01",
+    "current": false,
+    "years_of_service": "1.6",
+    "description": [
+      "Spearheaded development and management of complex, multi-sensor machine vision systems.",
+      "Oversaw full lifecycle of product development, from concept to production.",
+      "Led the engineering team in implementing a patented pallet perception system."
+    ],
+    "skills": ["Engineering Leadership", "Product Development", "Patented Technologies"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_7",
+    "type": "job",
+    "title": "Co-Founder",
+    "employer": "Cloud 9 Perception",
+    "location": "Arlington, TX",
+    "start_date": "2016-11-01",
+    "end_date": "2018-11-01",
+    "current": false,
+    "years_of_service": "2.0",
+    "description": [
+      "Guided the company through growth phases, focusing on scaling operations and optimizing product development.",
+      "Oversaw R&D and software development, setting strategic goals for efficient execution.",
+      "Managed key client relationships and ensured high standards of quality."
+    ],
+    "skills": ["Entrepreneurship", "R&D Management", "Client Relations"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_8",
+    "type": "job",
+    "title": "Software Development Manager",
+    "employer": "WRHowell",
+    "location": "Everman, TX",
+    "start_date": "2015-11-01",
+    "end_date": "2016-08-01",
+    "current": false,
+    "years_of_service": "0.8",
+    "description": [
+      "Led a team of developers in designing, implementing, and testing down-hole pump system control software.",
+      "Managed project and technical aspects, including simulator system development for operator training.",
+      "Developed e-commerce and web applications."
+    ],
+    "skills": ["Software Development Management", "Control Systems", "Project Leadership"],
+    "embedding": [] 
+  },
+  {
+    "id": "job_9",
+    "type": "job",
+    "title": "Optoelectronics Engineer",
+    "employer": "Black Optex",
+    "location": "Euless, TX",
+    "start_date": "2013-09-01",
+    "end_date": "2014-09-01",
+    "current": false,
+    "years_of_service": "1.0",
+    "description": [
+      "Assisted in developing digital vision systems and managing technology implementations.",
+      "Focused on developing low-cost digital night vision systems."
+    ],
+    "skills": ["Optoelectronics", "Digital Vision Systems", "Technology Implementation"],
+    "embedding": [] 
+  }
+]

@@ -1,0 +1,434 @@
+[
+  {
+    "id": "skill_1",
+    "type": "skill",
+    "name": "Azure",
+    "description": "Extensive experience with Azure cloud services, including Kubernetes and DevOps automation. Proficient in designing and managing cloud environments to support scalable and secure applications.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_2",
+    "type": "skill",
+    "name": "iOS Development",
+    "description": "Developed iOS-centric AI vision platforms and mobile applications. Skilled in integrating iOS apps with backend services and optimizing performance for mobile devices.",
+    "related_experience": ["job_3", "job_4"],
+    "embedding": []
+  },
+  {
+    "id": "skill_3",
+    "type": "skill",
+    "name": "Kubernetes",
+    "description": "Expertise in Kubernetes for container orchestration, managing microservices, and automating deployments. Used extensively in DevOps and cloud architecture roles.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_4",
+    "type": "skill",
+    "name": "DevOps",
+    "description": "Specialized in DevOps practices including CI/CD pipelines, Infrastructure as Code (IaC), and automation. Experienced in GitLab CI/CD, Ansible, Terraform, and GitHub Actions.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_5",
+    "type": "skill",
+    "name": "Cloud Architecture",
+    "description": "Proficient in designing and implementing cloud architectures for scalable, high-performance applications. Skilled in using AWS, Azure, and GCP for distributed cloud solutions.",
+    "related_experience": ["job_3", "job_4"],
+    "embedding": []
+  },
+  {
+    "id": "skill_6",
+    "type": "skill",
+    "name": "Machine Learning",
+    "description": "Experience in applying machine learning algorithms for vision systems, data extraction, and AI-driven applications. Familiar with tools like TensorFlow, PyTorch, and Azure ML.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_7",
+    "type": "skill",
+    "name": "Microservices",
+    "description": "Design and implementation of microservice architectures for scalable, modular applications. Skilled in containerization, API development, and service orchestration.",
+    "related_experience": ["job_3", "job_4"],
+    "embedding": []
+  },
+  {
+    "id": "skill_8",
+    "type": "skill",
+    "name": "Software Architecture",
+    "description": "Extensive experience in designing software architecture for complex systems, ensuring scalability, security, and performance. Involved in full-stack development and backend design.",
+    "related_experience": ["job_4", "job_5", "job_6"],
+    "embedding": []
+  },
+  {
+    "id": "skill_9",
+    "type": "skill",
+    "name": "System Integration",
+    "description": "Proficient in integrating various systems and technologies, particularly in cloud, AI, and vision systems. Expertise in connecting hardware, software, and APIs for seamless operation.",
+    "related_experience": ["job_5", "job_6"],
+    "embedding": []
+  },
+  {
+    "id": "skill_10",
+    "type": "skill",
+    "name": "Project Management",
+    "description": "Strong project management skills, including leading cross-functional teams, managing project timelines, and delivering high-quality products on time.",
+    "related_experience": ["job_5", "job_6", "job_7"],
+    "embedding": []
+  },
+  {
+    "id": "skill_11",
+    "type": "skill",
+    "name": "Data Science",
+    "description": "Skilled in data analysis, statistical modeling, and data visualization. Experienced in using Python and PostgreSQL for data manipulation and insight extraction.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_12",
+    "type": "skill",
+    "name": "Deep Learning",
+    "description": "Expert in deep learning techniques for image recognition, natural language processing, and predictive analytics. Familiar with neural network architectures such as CNNs, RNNs, and Transformers.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_13",
+    "type": "skill",
+    "name": "Natural Language Processing (NLP)",
+    "description": "Proficient in developing NLP models for text analysis, sentiment detection, and language generation. Experienced with NLP libraries like Hugging Face Transformers.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_14",
+    "type": "skill",
+    "name": "AI Model Deployment",
+    "description": "Experienced in deploying AI models to production environments using containerization, serverless architectures, and cloud-based services such as Azure ML and AWS SageMaker.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_15",
+    "type": "skill",
+    "name": "Big Data Analytics",
+    "description": "Skilled in big data tools and technologies such as Snowflake for large-scale data processing and analytics.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_16",
+    "type": "skill",
+    "name": "Predictive Modeling",
+    "description": "Expertise in creating predictive models using regression, classification, and time-series analysis. Proficient in applying these models to business and operational decision-making.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_17",
+    "type": "skill",
+    "name": "Data Engineering",
+    "description": "Proficient in designing data pipelines, ETL processes, and data warehousing solutions to support analytics and machine learning applications.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_18",
+    "type": "skill",
+    "name": "GitOps",
+    "description": "Expertise in GitOps methodologies for continuous deployment and infrastructure automation. Skilled in using ArgoCD and GitLab for managing CI/CD workflows.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_19",
+    "type": "skill",
+    "name": "Containerization",
+    "description": "Proficient in Docker and Podman for containerizing applications, ensuring consistent environments across development, testing, and production.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_20",
+    "type": "skill",
+    "name": "Platform Engineering",
+    "description": "Experience in building and managing developer platforms that enhance productivity and ensure scalability, leveraging tools like GitLab-CI, OpenShift, and Atlassian.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_21",
+    "type": "skill",
+    "name": "CI/CD Pipelines",
+    "description": "Specialized in setting up and optimizing CI/CD pipelines using GitLab, Jenkins, and GitHub Actions for streamlined code integration and deployment.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_22",
+    "type": "skill",
+    "name": "Version Control",
+    "description": "Extensive use of GitLab and GitHub for version control, collaboration, and continuous integration. Skilled in managing code repositories and branching strategies.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_23",
+    "type": "skill",
+    "name": "Monitoring and Observability",
+    "description": "Experience with SonarQube, Prometheus, and Grafana for code quality checks, monitoring, and maintaining application health.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_24",
+    "type": "skill",
+    "name": "Database Management",
+    "description": "Skilled in managing and optimizing databases including MongoDB, PostgreSQL, and other NoSQL solutions for high performance and scalability.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_25",
+    "type": "skill",
+    "name": "Semantic Kernel & Autogen",
+    "description": "Proficient in Semantic Kernel and Autogen tools for advanced AI model development and data-driven insights generation.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_26",
+    "type": "skill",
+    "name": "OpenAI Integration",
+    "description": "Experience in integrating OpenAI models for natural language processing, automation, and enhancing platform capabilities.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_27",
+    "type": "skill",
+    "name": "Robotics",
+    "description": "Extensive experience in robotics, including programming and integration of industrial robots such as KUKA, Staubli, and Universal Robots. Expertise in collaborative robotics and vision-guided systems.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_28",
+    "type": "skill",
+    "name": "SLAM (Simultaneous Localization and Mapping)",
+    "description": "Proficient in SLAM technologies for robotics applications, enhancing navigation and mapping capabilities in dynamic environments.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_29",
+    "type": "skill",
+    "name": "Vision Guided Robotics",
+    "description": "Skilled in implementing vision-guided robotic systems using technologies such as Structured Light, TOF 3D Vision, and Stereoscopic 3D Vision.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_30",
+    "type": "skill",
+    "name": "ROS (Robot Operating System)",
+    "description": "Experienced in using ROS for robot programming, integration, and control, facilitating advanced robotic applications and automation.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_31",
+    "type": "skill",
+    "name": "Industrial Automation",
+    "description": "Expert in industrial automation systems including PLC programming, wiring harness design, and integrating robotics with manufacturing and warehouse automation solutions.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_32",
+    "type": "skill",
+    "name": "3D Vision Systems",
+    "description": "Proficient in various 3D vision systems including Structured Light, TOF (Time-of-Flight), Stereoscopic Vision, and LIDAR for robotics and automation.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_33",
+    "type": "skill",
+    "name": "Nvidia Jetson Platform",
+    "description": "Extensive experience with Nvidia Jetson platforms including Jetson TX2, for deploying AI and computer vision applications in robotics.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_34",
+    "type": "skill",
+    "name": "CUDA",
+    "description": "Skilled in using CUDA for GPU-accelerated computing, optimizing performance for robotics and computer vision applications.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_35",
+    "type": "skill",
+    "name": "OpenCV and Computer Vision",
+    "description": "Proficient in OpenCV for computer vision tasks, including image processing, feature extraction, and integrating vision into robotic systems.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_36",
+    "type": "skill",
+    "name": "PCL (Point Cloud Library)",
+    "description": "Expert in using PCL and Open3D for 3D data processing and manipulation, essential for robotics and 3D vision applications.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_37",
+    "type": "skill",
+    "name": "CAM/CAD Software",
+    "description": "Proficient in CAM and CAD software including Inventor, Fusion 360, and RoboDK for designing robotic parts, simulations, and control systems.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_38",
+    "type": "skill",
+    "name": "Manufacturing and Warehouse Automation",
+    "description": "Experience in designing and implementing automation solutions for manufacturing and warehouse operations, including ASRS and robotic integration.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_39",
+    "type": "skill",
+    "name": "Coordinate Transformations",
+    "description": "Skilled in coordinate transformations for robotics, essential for aligning robotic movements with sensor data and real-world tasks.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_40",
+    "type": "skill",
+    "name": "Intel Realsense",
+    "description": "Proficient in using Intel Realsense cameras for depth perception and 3D vision in robotics and automation applications.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_41",
+    "type": "skill",
+    "name": "Swarm Robotics",
+    "description": "Expertise in swarm robotics, focusing on the coordination and control of multiple robots for collaborative tasks.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_42",
+    "type": "skill",
+    "name": "UAS (Unmanned Aerial Systems)",
+    "description": "Proficient in the design, deployment, and operation of UAS, including integration of autopilot software and advanced sensors.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_43",
+    "type": "skill",
+    "name": "Autopilot Software",
+    "description": "Skilled in developing and implementing autopilot software for robotics and unmanned aerial systems, enhancing autonomous control capabilities.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_44",
+    "type": "skill",
+    "name": "Multispectral Imaging",
+    "description": "Experience in multispectral imaging techniques for advanced data analysis and environmental sensing applications.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_45",
+    "type": "skill",
+    "name": "ONYX AI Runtime",
+    "description": "Proficient in using ONYX AI Runtime for deploying machine learning models in real-time applications.",
+    "related_experience": ["job_4", "job_5"],
+    "embedding": []
+  },
+  {
+    "id": "skill_46",
+    "type": "skill",
+    "name": "LLMs and SLMs (Large and Small Language Models)",
+    "description": "Extensive experience in developing, deploying, and optimizing large and small language models for various NLP tasks.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_47",
+    "type": "skill",
+    "name": "Prompt Engineering",
+    "description": "Expertise in prompt engineering techniques for optimizing AI model responses in natural language processing applications.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_48",
+    "type": "skill",
+    "name": "Azure AI Search",
+    "description": "Skilled in leveraging Azure AI Search for creating intelligent search solutions with integrated AI capabilities.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_49",
+    "type": "skill",
+    "name": "Cosine Similarity Search",
+    "description": "Proficient in implementing cosine similarity search techniques for data retrieval and AI applications.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_50",
+    "type": "skill",
+    "name": "Azure Document Intelligence",
+    "description": "Experience in using Azure Document Intelligence to extract, analyze, and process data from unstructured documents.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_51",
+    "type": "skill",
+    "name": "Azure CLI",
+    "description": "Proficient in using Azure CLI for managing Azure resources, automating workflows, and optimizing cloud operations.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  },
+  {
+    "id": "skill_52",
+    "type": "skill",
+    "name": "Microservices",
+    "description": "Extensive experience in designing, developing, and managing microservices architectures to build scalable, modular applications.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_53",
+    "type": "skill",
+    "name": "Queues",
+    "description": "Skilled in using message queues for asynchronous communication between services, enhancing system scalability and reliability.",
+    "related_experience": ["job_1", "job_3"],
+    "embedding": []
+  },
+  {
+    "id": "skill_54",
+    "type": "skill",
+    "name": "DevSecOps",
+    "description": "Expertise in integrating security practices into DevOps workflows, focusing on automating security checks and ensuring compliance.",
+    "related_experience": ["job_1", "job_2"],
+    "embedding": []
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "project_1",
+    "type": "project",
+    "name": "The Beer Money App",
+    "start_date": "2016-08-01",
+    "end_date": "2017-04-01",
+    "description": "An app to help users save money on outings and day-to-day expenses through geo-location-based coupons and savings. The app tracked user savings and partnered with local businesses to offer specials.",
+    "skills": ["iOS", "Mobile Applications", "Web Development", "Databases"],
+    "embedding": []
+  },
+  {
+    "id": "project_2",
+    "type": "project",
+    "name": "GridLock",
+    "start_date": "2015-09-01",
+    "end_date": "2016-09-01",
+    "description": "An API platform that enables customers to monitor and control traffic lights and track traffic in real-time, optimizing traffic light schedules with machine learning algorithms to reduce emissions and congestion.",
+    "skills": ["System Architecture", "API Development", "Embedded Systems", "Product Design", "Web Development"],
+    "embedding": []
+  },
+  {
+    "id": "project_3",
+    "type": "project",
+    "name": "Liza",
+    "start_date": "2014-09-01",
+    "end_date": "2014-12-01",
+    "description": "A gamification app designed to promote water conservation during drought conditions in Texas, using smart water meters and a mobile interface.",
+    "skills": ["API Development", "Embedded Systems", "Software Architectural Design", "iOS", "Mobile Applications"],
+    "embedding": []
+  },
+  {
+    "id": "project_4",
+    "type": "project",
+    "name": "Vert",
+    "start_date": "2014-09-01",
+    "end_date": "2014-12-01",
+    "description": "A gamification app encouraging recycling by using BLE-based smart trashcan sensors to reward participants for their conservation efforts.",
+    "skills": ["Full-Stack Development", "API Development", "Embedded Systems", "iOS", "Mobile Applications", "Databases"],
+    "embedding": []
+  },
+  {
+    "id": "project_5",
+    "type": "project",
+    "name": "MILA | Aerospace Meets Automation",
+    "start_date": "2023-01-01",
+    "end_date": "2023-05-26",
+    "description": "An easy-to-customize secondary operation tube-finishing, collaborative robot system that accurately measures, cuts, and deburrs bent tubing within tight tolerances, without operator intervention or expensive fixtures.",
+    "skills": [
+      "Robotic Manipulation",
+      "Robotic Controls",
+      "PLC Programming",
+      "Controller Programming",
+      "UI Programming",
+      "3D Vision Guided Robotics Software",
+      "System Design",
+      "System Architecture",
+      "System Testing",
+      "Collaboration and Coordination"
+    ],
+    "details": [
+      "Developed a robotic workcell to precisely trim intricately bent tubes used in aerospace, replacing manual processes with fully automated solutions.",
+      "Implemented 3D laser scanning, quality control verification, and high precision cutting technologies to achieve fixtureless, high-quality tube finishing.",
+      "Worked on robotic manipulation, robotic controls, and PLC programming, focusing on the accuracy and safety of the automated tube cutting process.",
+      "Integrated advanced vision systems and collaborative robotics to comply with ANSI/RIA R15.06 standards, improving safety and operational efficiency.",
+      "Conducted system design, testing, and calibration, including upgrading pneumatic actuators and safety systems to ensure precision and reliability."
+    ],
+    "customer": "A Fortune 500 manufacturing client in the aerospace industry (obfuscated).",
+    "embedding": []
+  },
+  {
+    "id": "project_6",
+    "type": "project",
+    "name": "Pallet Perception System",
+    "start_date": "2024-01-01",
+    "end_date": "2024-04-30",
+    "description": "A proprietary system integrating pallet scanning hardware, structured light sensors, 2D cameras, rotating high-resolution cameras, and environmental sensors to create a comprehensive 3D and 2D model of each pallet. This system enhances detection of product, damage, and risk assessment in real-time, while also providing valuable data for analytics.",
+    "skills": [
+      "System Design",
+      "System Architecture",
+      "Manufacturing",
+      "Integration",
+      "Control Systems",
+      "Computer Vision",
+      "Machine Learning",
+      "Testing",
+      "Data Science",
+      "Customer Collaboration and Communication"
+    ],
+    "details": [
+      "Designed, built, and deployed a fully automated system that captures comprehensive 3D and 2D models of incoming pallets in a refrigerated warehouse environment, enhancing efficiency and accuracy.",
+      "Integrated structured light sensors, 2D cameras, rotating high-resolution cameras, special lighting, and environmental sensors to detect product details, assess damage, and identify potential risks.",
+      "Developed control systems and advanced vision technologies to ensure precise handling and placement of products, reducing the need for manual intervention.",
+      "Collaborated closely with the customer to refine system capabilities, including real-time barcode scanning, product weight identification, and quality control enhancements.",
+      "Managed data science and machine learning models that continually improve system performance, supporting both operational tasks and data analytics projects for the customer."
+    ],
+    "customer": "A leading logistics company specializing in cold storage and supply chain solutions (obfuscated).",
+    "embedding": []
+  },
+  {
+    "id": "project_7",
+    "type": "project",
+    "name": "Loading Dock Awareness Monitor",
+    "start_date": "2024-05-01",
+    "end_date": "2024-09-01",
+    "description": "A machine vision and AI-enabled loading dock camera system that monitors forklift and personnel traffic at each bay door opening. The system alerts personnel of approaching vehicles and hazards using convolutional neural networks (CNNs) for object detection.",
+    "skills": [
+      "System Design",
+      "Embedded Vision Systems",
+      "ARM Architecture",
+      "2D Cameras",
+      "AI",
+      "Machine Learning",
+      "Computer Vision",
+      "Object Detection",
+      "System Integration"
+    ],
+    "details": [
+      "Developed and deployed an embedded vision system using ARM architecture and 2D cameras to monitor loading dock activities, enhancing safety and awareness.",
+      "Utilized convolutional neural networks (CNNs) to detect specific objects and potential hazards, providing real-time alerts to personnel and operators.",
+      "Designed the system architecture to integrate seamlessly into existing dock environments, providing critical safety functions without disrupting operations.",
+      "Led system testing and validation to ensure accuracy in detection and reliable alerting under various environmental conditions.",
+      "Collaborated with end-users to refine alert parameters and improve overall system performance, tailoring the technology to the specific needs of warehouse environments."
+    ],
+    "embedding": []
+  },
+  {
+    "id": "project_8",
+    "type": "project",
+    "name": "Palletizing Machine Layer Validation",
+    "start_date": "2024-10-01",
+    "end_date": "2025-02-01",
+    "description": "A 3D vision-based system that validates each layer on a pallet as it is being assembled by a machine, preventing mishaps that require human intervention, enhancing safety, and increasing uptime.",
+    "skills": [
+      "3D Vision Systems",
+      "Machine Vision",
+      "System Design",
+      "System Architecture",
+      "Robotics",
+      "Safety Systems",
+      "Automation",
+      "Manufacturing Integration"
+    ],
+    "details": [
+      "Developed a 3D vision-based validation system to monitor and validate each pallet layer during the assembly process, reducing the need for manual intervention.",
+      "Implemented advanced machine vision techniques to detect errors in real-time, preventing potential mishaps and ensuring continuous operation.",
+      "Designed the system architecture to integrate seamlessly with existing palletizing machines, enhancing safety protocols and operational efficiency.",
+      "Conducted extensive testing and calibration to ensure system accuracy and reliability, focusing on preventing machine stops due to assembly errors.",
+      "Collaborated with manufacturing teams to deploy and optimize the system, ensuring it met safety standards and operational requirements."
+    ],
+    "embedding": []
+  },
+  {
+    "id": "project_9",
+    "type": "project",
+    "name": "WRHowell Down Hole Pump System",
+    "start_date": "2015-11-01",
+    "end_date": "2016-08-01",
+    "description": "A computer-controlled downhole water pump system that used a coil tubing system to deploy a chain of 'heart-pump' like pumps to reduce water pressure in neglected gas wells, reintroducing gas production. The system included a training simulator with a fully virtualized version of the pump system and a mock cockpit with real touchscreen controls.",
+    "skills": [
+      "System Design",
+      "System Architecture",
+      "Control Systems",
+      "Embedded Systems",
+      "PLC Programming",
+      "UI Programming",
+      "Simulator Development",
+      "C++",
+      "DiSTi UI Framework",
+      "QT UI Framework"
+    ],
+    "details": [
+      "Developed a computer-controlled downhole water pump system designed to reintroduce gas production to neglected wells by reducing water pressure using a chain of 'heart-pump' like pumps.",
+      "Designed and implemented the control systems using C++ and embedded programming, orchestrating on-site communication between pumps, control systems, and the UI.",
+      "Integrated the DiSTi and QT UI frameworks to create intuitive interfaces for operators, enabling real-time monitoring and control of the pump system.",
+      "Developed a simulator for training operators, featuring a fully virtualized system and a mock cockpit with real touchscreen controls, enhancing operator understanding and safety.",
+      "Led system testing, calibration, and integration to ensure robust communication between components and accurate control of the downhole pumps."
+    ],
+    "customer": "WRHowell (obfuscated).",
+    "embedding": []
+  }
+]

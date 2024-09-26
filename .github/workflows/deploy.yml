@@ -1,0 +1,108 @@
+name: Deploy Infrastructure and Application
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+
+
+jobs:
+  build_backend:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: jamesstaudcom-backend
+      DOCKER_HUB_REPO: jamesstaud/backend.jamesstaud.com
+      DOCKERFILE_PATH: ./backend/Dockerfile
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Convert repository name to lowercase
+        id: repo
+        run: |
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME="${REPO_NAME#*/}"
+          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
+      
+      - name: Install Commitizen
+        run: pip install commitizen
+
+      - name: Get version from cz.yaml
+        id: get_version
+        run: echo "::set-output name=version::$(cz version --project)"
+      
+      - name: Build the Docker image
+        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
+      
+      - name: Run the Docker container
+        run: |
+          docker run --name ${{ env.IMAGE_NAME }} -d \
+          -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+          -e OPENAI_ORGANIZATION_ID=${{ secrets.OPENAI_ORGANIZATION_ID }} \
+          -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
+          ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }}
+
+      - name: Push the Docker image to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+          docker tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
+          docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.DOCKER_HUB_REPO }}:latest
+          docker push ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
+          docker push ${{ env.DOCKER_HUB_REPO }}:latest
+
+      - name: Trigger DigitalOcean redeploy
+        run: |
+          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_FRONTEND_APP_ID }}/deployments" \
+          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"force_build":true}'
+
+  build_frontend:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: jamesstaudcom-frontend
+      DOCKER_HUB_REPO: jamesstaud/jamesstaud.com
+      DOCKERFILE_PATH: ./frontend/Dockerfile
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Convert repository name to lowercase
+        id: repo
+        run: |
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME="${REPO_NAME#*/}"
+          echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
+      
+      - name: Install Commitizen
+        run: pip install commitizen
+
+      - name: Get version from cz.yaml
+        id: get_version
+        run: echo "::set-output name=version::$(cz version --project)"
+      
+      - name: Build the Docker image
+        run: docker build . --file ${{ env.DOCKERFILE_PATH }} --tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} --tag ${{ env.IMAGE_NAME }}:latest
+      
+      - name: Run the Docker container
+        run: |
+          docker run --name ${{ env.IMAGE_NAME }} -d \
+          -e BACKEND_API_URL=${{ secrets.BACKEND_API_URL }} \
+          ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }}
+
+      - name: Push the Docker image to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+          docker tag ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.version }} ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
+          docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.DOCKER_HUB_REPO }}:latest
+          docker push ${{ env.DOCKER_HUB_REPO }}:${{ steps.get_version.outputs.version }}
+          docker push ${{ env.DOCKER_HUB_REPO }}:latest
+
+      - name: Trigger DigitalOcean redeploy
+        run: |
+          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_BACKEND_APP_ID }}/deployments" \
+          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"force_build":true}'
+

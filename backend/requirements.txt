@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pymongo[srv]
+python-dotenv
+openai
+llama-index
+pydantic
+PyPDF2

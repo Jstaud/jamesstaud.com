@@ -1,0 +1,38 @@
+[
+    {
+      "id": "education_1",
+      "type": "education",
+      "institution": "University of Texas at Arlington",
+      "location": "Arlington, TX",
+      "degree": "Bachelor's Degree in Computer Engineering",
+      "start_date": "2011-08-01",
+      "end_date": "2015-12-01",
+      "current": false,
+      "years_of_study": "4.3",
+      "description": [
+        "Led projects on human gesture recognition and foot traffic analysis, demonstrating skills in data analysis and sensor integration.",
+        "Published papers presented at conferences, showcasing research, documentation, and communication abilities.",
+        "Gained hands-on experience with technologies like Kinect and Oculus Rift, highlighting expertise in system integration and automation.",
+        "Contributed to the relaunch of the Mobi student organization focused on mobile development, winning hackathons and building applications like the UTA radio app."
+      ],
+      "skills": ["Data Analysis", "Sensor Integration", "Research", "System Integration", "Automation", "Mobile Development"],
+      "embedding": [] 
+    },
+    {
+      "id": "education_2",
+      "type": "education",
+      "institution": "Tarrant County College",
+      "location": "Fort Worth, TX",
+      "degree": "General Studies (Pre-Engineering)",
+      "start_date": "2008-01-01",
+      "end_date": "2011-05-01",
+      "current": false,
+      "years_of_study": "3.4",
+      "description": [
+        "Completed foundational coursework in mathematics, physics, and computer science in preparation for transfer to a four-year engineering program.",
+        "Participated in various engineering and technology clubs, developing early skills in programming and system design."
+      ],
+      "skills": ["Mathematics", "Physics", "Computer Science", "Programming"],
+      "embedding": [] 
+    }
+  ]

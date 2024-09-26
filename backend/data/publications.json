@@ -1,0 +1,23 @@
+[
+    {
+      "id": "publication_1",
+      "type": "publication",
+      "title": "Monitoring Breathing Activity and Sleep Patterns Using Multimodal Non-Invasive Technologies",
+      "journal": "ACM",
+      "publication_date": "2015-07-03",
+      "description": "A study on a non-invasive system using sensors and machine learning to monitor sleep and breathing patterns, aimed at improving clinical and home monitoring.",
+      "skills": ["Machine Learning", "Computer Vision", "Data Analysis"],
+      "embedding": [] 
+    },
+    {
+      "id": "publication_2",
+      "type": "publication",
+      "title": "What is the Point of Mobile Systems? New Technology for Students",
+      "journal": "ASEE",
+      "publication_date": "2015-04-02",
+      "description": "Explores the impact of mobile technology in education, highlighting innovative student projects utilizing sensors and smart devices in classroom settings.",
+      "skills": ["Mobile Development", "Sensor Integration", "Education Technology"],
+      "embedding": [] 
+    }
+  ]
+  
