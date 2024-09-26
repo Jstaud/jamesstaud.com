@@ -1,3 +1,8 @@
+"""
+This module handles the creation of chat completions using the OpenAI API.
+It sets up a FastAPI application and runs it using Uvicorn.
+"""
+
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security.api_key import APIKeyHeader
 from llama_indexing import setup_llama_index, query_llama_index
@@ -129,6 +134,16 @@ async def query(request: QueryRequest, api_key: str = Depends(get_api_key)):
         raise HTTPException(status_code=500, detail=str(e))
 
 def generate_response(question: str, context: str):
+    """
+    Generates a response using the OpenAI API based on the provided context and question.
+
+    Parameters:
+    context (str): The context information to be used by the model.
+    question (str): The question to be answered by the model.
+
+    Returns:
+    str: The generated response from the model.
+    """
     messages = [
         {
             "role": "system",
