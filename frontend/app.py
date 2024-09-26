@@ -31,8 +31,8 @@ def open_url(url):
 
 # Function to handle user questions by querying the backend API
 def answer_question(question):
-    # backend_api_url = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/")
-    backend_api_url = "http://127.0.0.1:8000/"
+    backend_api_url = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/")
+    # backend_api_url = "http://127.0.0.1:8000/"
     api_key = os.getenv("API_KEY")  # Retrieve the API key from environment variables
     headers = {"X-API-Key": api_key}  # Include the API key in the headers
 
