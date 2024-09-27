@@ -25,6 +25,20 @@ jobs:
           REPO_NAME="${{ github.repository }}"
           REPO_NAME="${REPO_NAME#*/}"
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
+
+      - name: Retrieve secrets from Bitwarden
+        uses: bitwarden/sm-action@v1
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          secrets: |
+            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_USERNAME
+            bdbb16bc-0b9b-472e-99fa-af4101309076 > DOCKER_HUB_ACCESS_TOKEN
+            00000000-0000-0000-0000-000000000000 > OPENAI_API_KEY
+            00000000-0000-0000-0000-000000000000 > OPENAI_ORGANIZATION_ID
+            00000000-0000-0000-0000-000000000000 > MONGODB_URI
+            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_API_TOKEN
+            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_BACKEND_APP_ID
+            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_REPO
       
       - name: Install Commitizen
         run: pip install commitizen
@@ -54,7 +68,7 @@ jobs:
 
       - name: Trigger DigitalOcean redeploy
         run: |
-          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_FRONTEND_APP_ID }}/deployments" \
+          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_BACKEND_APP_ID }}/deployments" \
           -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{"force_build":true}'
@@ -74,6 +88,17 @@ jobs:
           REPO_NAME="${{ github.repository }}"
           REPO_NAME="${REPO_NAME#*/}"
           echo "::set-output name=repo::$(echo $REPO_NAME | awk '{print tolower($0)}')"
+
+      - name: Retrieve secrets from Bitwarden
+        uses: bitwarden/sm-action@v1
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          secrets: |
+            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_USERNAME
+            bdbb16bc-0b9b-472e-99fa-af4101309076 > DOCKER_HUB_ACCESS_TOKEN
+            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_API_TOKEN
+            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_FRONTEND_APP_ID
+            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_REPO
       
       - name: Install Commitizen
         run: pip install commitizen
@@ -101,7 +126,7 @@ jobs:
 
       - name: Trigger DigitalOcean redeploy
         run: |
-          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_BACKEND_APP_ID }}/deployments" \
+          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITALOCEAN_FRONTEND_APP_ID }}/deployments" \
           -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_API_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{"force_build":true}'

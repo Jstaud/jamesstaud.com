@@ -1,6 +1,8 @@
 # backend/Dockerfile
 FROM python:3.9-slim
 WORKDIR /app
+# Ensure /tmp directory exists
+RUN mkdir -p /tmp
 COPY /backend .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .

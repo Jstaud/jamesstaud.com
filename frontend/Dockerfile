@@ -1,6 +1,8 @@
 # frontend/Dockerfile
 FROM python:3.9-slim
 WORKDIR /app
+# Ensure /tmp directory exists
+RUN mkdir -p /tmp
 COPY /frontend .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
