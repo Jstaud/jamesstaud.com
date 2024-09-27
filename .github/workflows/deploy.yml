@@ -29,16 +29,15 @@ jobs:
       - name: Retrieve secrets from Bitwarden
         uses: bitwarden/sm-action@v1
         with:
-          access_token: ${{ secrets.ACCESS_TOKEN }}
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           secrets: |
-            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_USERNAME
-            bdbb16bc-0b9b-472e-99fa-af4101309076 > DOCKER_HUB_ACCESS_TOKEN
-            00000000-0000-0000-0000-000000000000 > OPENAI_API_KEY
-            00000000-0000-0000-0000-000000000000 > OPENAI_ORGANIZATION_ID
-            00000000-0000-0000-0000-000000000000 > MONGODB_URI
-            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_API_TOKEN
-            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_BACKEND_APP_ID
-            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_REPO
+            e141c0c3-1a30-4fad-9613-b1f800404876 > DOCKER_HUB_USERNAME
+            0bc3f86e-16e0-4bc3-a415-b1f8003f857d > DOCKER_HUB_ACCESS_TOKEN
+            ecdf7436-0ce7-4ef7-8ee1-b1f800330a57 > OPENAI_API_KEY
+            add8726c-999b-46a1-8ff0-b1f800339413 > OPENAI_ORGANIZATION_ID
+            ef0599eb-685f-42b6-a3c2-b1f80033af83 > MONGODB_URI
+            337a07be-1587-4f9a-8379-b1f80032e000 > DIGITALOCEAN_API_TOKEN
+            68c3d613-d7ba-42e8-be36-b1f80035726b > API_KEY
       
       - name: Install Commitizen
         run: pip install commitizen
@@ -92,13 +91,12 @@ jobs:
       - name: Retrieve secrets from Bitwarden
         uses: bitwarden/sm-action@v1
         with:
-          access_token: ${{ secrets.ACCESS_TOKEN }}
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           secrets: |
-            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_USERNAME
-            bdbb16bc-0b9b-472e-99fa-af4101309076 > DOCKER_HUB_ACCESS_TOKEN
-            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_API_TOKEN
-            00000000-0000-0000-0000-000000000000 > DIGITALOCEAN_FRONTEND_APP_ID
-            00000000-0000-0000-0000-000000000000 > DOCKER_HUB_REPO
+            e141c0c3-1a30-4fad-9613-b1f800404876 > DOCKER_HUB_USERNAME
+            0bc3f86e-16e0-4bc3-a415-b1f8003f857d > DOCKER_HUB_ACCESS_TOKEN
+            337a07be-1587-4f9a-8379-b1f80032e000 > DIGITALOCEAN_API_TOKEN
+            68c3d613-d7ba-42e8-be36-b1f80035726b > API_KEY
       
       - name: Install Commitizen
         run: pip install commitizen
