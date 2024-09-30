@@ -6,3 +6,4 @@ openai
 llama-index
 pydantic
 PyPDF2
+bitwarden-sdk

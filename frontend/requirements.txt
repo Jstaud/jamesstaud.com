@@ -1,2 +1,4 @@
 gradio
 requests
+bitwarden-sdk
+python-dotenv

@@ -3,7 +3,50 @@ import requests
 import hashlib
 import gradio as gr
 import webbrowser
+import json
+import logging
+from datetime import datetime, timezone
+from bitwarden_sdk import BitwardenClient, DeviceType, client_settings_from_dict
+from dotenv import load_dotenv
 
+def fetch_bitwarden_secrets():
+    # Ensure /tmp directory exists
+    os.makedirs("/tmp", exist_ok=True)
+
+    # Create the BitwardenClient
+    client = BitwardenClient(
+        client_settings_from_dict(
+            {
+                "apiUrl": os.getenv("API_URL", "https://api.bitwarden.com"),
+                "deviceType": DeviceType.SDK,
+                "identityUrl": os.getenv("IDENTITY_URL", "https://identity.bitwarden.com"),
+                "userAgent": "Python",
+            }
+        )
+    )
+
+    # Add some logging
+    logging.basicConfig(level=logging.DEBUG)
+    organization_id = os.getenv("ORGANIZATION_ID", "962d8882-d64b-4647-8843-b17900fc4ed7")
+
+    # Set the state file location
+    state_path = os.getenv("STATE_FILE", "/tmp/bwstate.json")
+
+    # Authenticate with the Secrets Manager Access Token
+    client.auth().login_access_token(os.getenv("BW_ACCESS_TOKEN"), state_path)
+
+    # Sync secrets
+    client.secrets().sync(organization_id, None)
+
+    # Retrieve secrets
+    secrets = client.secrets().list(organization_id).data.data
+
+    # Set environment variables
+    for secret in secrets:
+        os.environ[secret.name] = secret.value
+
+# Fetch and set Bitwarden secrets
+fetch_bitwarden_secrets()
 
 # Function to generate Gravatar URL
 def get_gravatar_url(email, size=150):
@@ -32,7 +75,6 @@ def open_url(url):
 # Function to handle user questions by querying the backend API
 def answer_question(question):
     backend_api_url = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/")
-    # backend_api_url = "http://127.0.0.1:8000/"
     api_key = os.getenv("API_KEY")  # Retrieve the API key from environment variables
     headers = {"X-API-Key": api_key}  # Include the API key in the headers
 
@@ -47,8 +89,6 @@ def answer_question(question):
             headers=headers,
             timeout= api_timeout
         )
-        print(f"API response: {response.status_code}")
-        print(f"API response content: {response.content}")
         response.raise_for_status()
         response_json = response.json()
         content = response_json.get("answer")

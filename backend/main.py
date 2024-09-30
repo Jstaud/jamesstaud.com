@@ -11,6 +11,51 @@ from dotenv import load_dotenv
 from openai import OpenAI, completions
 from pymongo import MongoClient
 from pydantic import BaseModel
+from bitwarden_sdk import BitwardenClient, DeviceType, client_settings_from_dict
+import logging
+from datetime import datetime, timezone
+import json
+
+def fetch_bitwarden_secrets():
+    # Create the BitwardenClient
+    client = BitwardenClient(
+        client_settings_from_dict(
+            {
+                "apiUrl": os.getenv("API_URL", "https://api.bitwarden.com"),
+                "deviceType": DeviceType.SDK,
+                "identityUrl": os.getenv("IDENTITY_URL", "https://identity.bitwarden.com"),
+                "userAgent": "Python",
+            }
+        )
+    )
+
+    # Add some logging
+    logging.basicConfig(level=logging.DEBUG)
+    organization_id = os.getenv("ORGANIZATION_ID", "962d8882-d64b-4647-8843-b17900fc4ed7")
+
+    # Set the state file location
+    state_path = os.getenv("STATE_FILE", "/tmp/bwstate.json")
+
+    # Authenticate with the Secrets Manager Access Token
+    client.auth().login_access_token(os.getenv("BW_ACCESS_TOKEN"), state_path)
+
+    # Sync secrets
+    client.secrets().sync(organization_id, None)
+
+    # Retrieve secrets
+    secrets = client.secrets().list(organization_id).data.data
+
+    # Set environment variables
+    for secret in secrets:
+        if secret.name == "MONGODB_URI":
+            os.environ["MONGODB_URI"] = secret.value
+        elif secret.name == "OPENAI_API_KEY":
+            os.environ["OPENAI_API_KEY"] = secret.value
+        elif secret.name == "OPENAI_ORGANIZATION_ID":
+            os.environ["OPENAI_ORGANIZATION_ID"] = secret.value
+
+# Fetch and set Bitwarden secrets
+fetch_bitwarden_secrets()
 
 load_dotenv()
 
