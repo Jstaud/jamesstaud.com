@@ -27,13 +27,13 @@ def fetch_bitwarden_secrets():
 
     # Add some logging
     logging.basicConfig(level=logging.DEBUG)
-    organization_id = os.getenv("ORGANIZATION_ID")
+    organization_id = os.getenv("ORGANIZATION_ID", "962d8882-d64b-4647-8843-b17900fc4ed7")
 
     # Set the state file location
     state_path = os.getenv("STATE_FILE", "/tmp/bwstate.json")
 
     # Authenticate with the Secrets Manager Access Token
-    client.auth().login_access_token(os.getenv("ACCESS_TOKEN"), state_path)
+    client.auth().login_access_token(os.getenv("BW_ACCESS_TOKEN"), state_path)
 
     # Sync secrets
     client.secrets().sync(organization_id, None)
